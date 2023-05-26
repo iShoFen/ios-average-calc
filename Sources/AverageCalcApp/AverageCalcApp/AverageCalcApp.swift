@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import AverageCalcStub
 
 @main
 struct UCAverageApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            let stub = Stub()
+            HomePage(stub: stub)
         }
     }
 }

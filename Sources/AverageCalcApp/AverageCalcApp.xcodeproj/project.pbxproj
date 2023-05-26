@@ -7,17 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC64F0B62A1FB1500079CFFE /* AverageCalcStub in Frameworks */ = {isa = PBXBuildFile; productRef = EC64F0B52A1FB1500079CFFE /* AverageCalcStub */; };
+		EC64F0B82A1FF8CC0079CFFE /* BlocksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC64F0B72A1FF8CC0079CFFE /* BlocksView.swift */; };
+		EC64F0BB2A1FFA670079CFFE /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC64F0BA2A1FFA670079CFFE /* Colors.xcassets */; };
+		EC64F0BD2A1FFAEB0079CFFE /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC64F0BC2A1FFAEB0079CFFE /* Colors.swift */; };
+		EC64F0C22A2000B20079CFFE /* BlockItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC64F0C12A2000B20079CFFE /* BlockItem.swift */; };
+		EC64F0C52A2005990079CFFE /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC64F0C42A2005990079CFFE /* Double.swift */; };
+		EC64F0C82A200C8F0079CFFE /* UEsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC64F0C72A200C8F0079CFFE /* UEsView.swift */; };
+		EC64F0CA2A20108F0079CFFE /* UEItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC64F0C92A20108F0079CFFE /* UEItem.swift */; };
+		EC64F0CF2A203CE30079CFFE /* MarkSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC64F0CE2A203CE30079CFFE /* MarkSlider.swift */; };
 		ECDA041D2A1EAF7E007B6A3B /* AverageCalcApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDA041C2A1EAF7E007B6A3B /* AverageCalcApp.swift */; };
-		ECDA041F2A1EAF7E007B6A3B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDA041E2A1EAF7E007B6A3B /* ContentView.swift */; };
+		ECDA041F2A1EAF7E007B6A3B /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDA041E2A1EAF7E007B6A3B /* HomePage.swift */; };
 		ECDA04212A1EAF7E007B6A3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECDA04202A1EAF7E007B6A3B /* Assets.xcassets */; };
 		ECDA04242A1EAF7E007B6A3B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECDA04232A1EAF7E007B6A3B /* Preview Assets.xcassets */; };
 		ECDA042C2A1EAFE2007B6A3B /* AverageCalcModel in Frameworks */ = {isa = PBXBuildFile; productRef = ECDA042B2A1EAFE2007B6A3B /* AverageCalcModel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EC64F0B72A1FF8CC0079CFFE /* BlocksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksView.swift; sourceTree = "<group>"; };
+		EC64F0BA2A1FFA670079CFFE /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		EC64F0BC2A1FFAEB0079CFFE /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		EC64F0C12A2000B20079CFFE /* BlockItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockItem.swift; sourceTree = "<group>"; };
+		EC64F0C42A2005990079CFFE /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		EC64F0C72A200C8F0079CFFE /* UEsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UEsView.swift; sourceTree = "<group>"; };
+		EC64F0C92A20108F0079CFFE /* UEItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UEItem.swift; sourceTree = "<group>"; };
+		EC64F0CE2A203CE30079CFFE /* MarkSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkSlider.swift; sourceTree = "<group>"; };
 		ECDA04192A1EAF7E007B6A3B /* AverageCalcApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AverageCalcApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECDA041C2A1EAF7E007B6A3B /* AverageCalcApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageCalcApp.swift; sourceTree = "<group>"; };
-		ECDA041E2A1EAF7E007B6A3B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		ECDA041E2A1EAF7E007B6A3B /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		ECDA04202A1EAF7E007B6A3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECDA04232A1EAF7E007B6A3B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -28,12 +45,75 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECDA042C2A1EAFE2007B6A3B /* AverageCalcModel in Frameworks */,
+				EC64F0B62A1FB1500079CFFE /* AverageCalcStub in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC64F0B32A1FAADC0079CFFE /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				ECDA041E2A1EAF7E007B6A3B /* HomePage.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		EC64F0B42A1FAAE30079CFFE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EC64F0CB2A2016390079CFFE /* Utilities */,
+				EC64F0C62A200C4B0079CFFE /* UEs */,
+				EC64F0BE2A2000420079CFFE /* Blocks */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EC64F0B92A1FFA400079CFFE /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				ECDA04202A1EAF7E007B6A3B /* Assets.xcassets */,
+				EC64F0BA2A1FFA670079CFFE /* Colors.xcassets */,
+				EC64F0BC2A1FFAEB0079CFFE /* Colors.swift */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		EC64F0BE2A2000420079CFFE /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				EC64F0B72A1FF8CC0079CFFE /* BlocksView.swift */,
+				EC64F0C12A2000B20079CFFE /* BlockItem.swift */,
+			);
+			path = Blocks;
+			sourceTree = "<group>";
+		};
+		EC64F0C32A2005790079CFFE /* Formaters */ = {
+			isa = PBXGroup;
+			children = (
+				EC64F0C42A2005990079CFFE /* Double.swift */,
+			);
+			path = Formaters;
+			sourceTree = "<group>";
+		};
+		EC64F0C62A200C4B0079CFFE /* UEs */ = {
+			isa = PBXGroup;
+			children = (
+				EC64F0C72A200C8F0079CFFE /* UEsView.swift */,
+				EC64F0C92A20108F0079CFFE /* UEItem.swift */,
+			);
+			path = UEs;
+			sourceTree = "<group>";
+		};
+		EC64F0CB2A2016390079CFFE /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EC64F0CE2A203CE30079CFFE /* MarkSlider.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		ECDA04102A1EAF7E007B6A3B = {
 			isa = PBXGroup;
 			children = (
@@ -54,9 +134,11 @@
 		ECDA041B2A1EAF7E007B6A3B /* AverageCalcApp */ = {
 			isa = PBXGroup;
 			children = (
+				EC64F0B92A1FFA400079CFFE /* Assets */,
+				EC64F0C32A2005790079CFFE /* Formaters */,
+				EC64F0B42A1FAAE30079CFFE /* Views */,
+				EC64F0B32A1FAADC0079CFFE /* Pages */,
 				ECDA041C2A1EAF7E007B6A3B /* AverageCalcApp.swift */,
-				ECDA041E2A1EAF7E007B6A3B /* ContentView.swift */,
-				ECDA04202A1EAF7E007B6A3B /* Assets.xcassets */,
 				ECDA04222A1EAF7E007B6A3B /* Preview Content */,
 			);
 			path = AverageCalcApp;
@@ -95,6 +177,7 @@
 			name = AverageCalcApp;
 			packageProductDependencies = (
 				ECDA042B2A1EAFE2007B6A3B /* AverageCalcModel */,
+				EC64F0B52A1FB1500079CFFE /* AverageCalcStub */,
 			);
 			productName = AverageCalcApp;
 			productReference = ECDA04192A1EAF7E007B6A3B /* AverageCalcApp.app */;
@@ -138,6 +221,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC64F0BB2A1FFA670079CFFE /* Colors.xcassets in Resources */,
 				ECDA04242A1EAF7E007B6A3B /* Preview Assets.xcassets in Resources */,
 				ECDA04212A1EAF7E007B6A3B /* Assets.xcassets in Resources */,
 			);
@@ -150,8 +234,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECDA041F2A1EAF7E007B6A3B /* ContentView.swift in Sources */,
+				EC64F0CA2A20108F0079CFFE /* UEItem.swift in Sources */,
+				EC64F0CF2A203CE30079CFFE /* MarkSlider.swift in Sources */,
+				EC64F0B82A1FF8CC0079CFFE /* BlocksView.swift in Sources */,
+				EC64F0BD2A1FFAEB0079CFFE /* Colors.swift in Sources */,
+				EC64F0C82A200C8F0079CFFE /* UEsView.swift in Sources */,
+				ECDA041F2A1EAF7E007B6A3B /* HomePage.swift in Sources */,
 				ECDA041D2A1EAF7E007B6A3B /* AverageCalcApp.swift in Sources */,
+				EC64F0C52A2005990079CFFE /* Double.swift in Sources */,
+				EC64F0C22A2000B20079CFFE /* BlockItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +449,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EC64F0B52A1FB1500079CFFE /* AverageCalcStub */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AverageCalcStub;
+		};
 		ECDA042B2A1EAFE2007B6A3B /* AverageCalcModel */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AverageCalcModel;
