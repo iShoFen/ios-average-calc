@@ -4,7 +4,9 @@
 
 import Foundation
 
-public struct Block {
+public struct Block: Identifiable {
+    public let id: UUID
+
     public var name: String {
         get { _name }
         set {
@@ -25,15 +27,16 @@ public struct Block {
             var coefficient = 0.0
 
             for ue in ues {
-                average += ue.average.value * ue.average.coefficient
-                coefficient += ue.average.coefficient
+                average += ue.average * ue.coefficient
+                coefficient += ue.coefficient
             }
 
             return average / coefficient
         }
     }
 
-    public init(name: String, ues: [UE]) {
+    public init(id: UUID = UUID(), name: String, ues: [UE]) {
+        self.id = id
         _name = name
         self.ues = ues
     }

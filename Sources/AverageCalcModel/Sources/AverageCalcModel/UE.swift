@@ -4,7 +4,9 @@
 
 import Foundation
 
-public struct UE {
+public struct UE: Identifiable {
+    public let id: UUID
+
     public var name: String {
         get { _name }
         set {
@@ -18,8 +20,20 @@ public struct UE {
     private var _name: String
 
     public private(set) var courses: [Course]
+    
+    public var coefficient: Double {
+        get { _coefficient }
+        set {
+            guard newValue > 0 else {
+                return
+            }
 
-    public var average: (value: Double, coefficient: Double) {
+            _coefficient = newValue
+        }
+    }
+    private var _coefficient: Double
+
+    public var average: Double {
         get {
             var average = 0.0
             var coefficient = 0.0
@@ -29,12 +43,14 @@ public struct UE {
                 coefficient += course.coefficient
             }
 
-            return (average / coefficient, coefficient)
+            return average / coefficient
         }
     }
 
-    public init(name: String, courses: [Course]) {
+    public init(id: UUID = UUID(), name: String, coefficient: Double, courses: [Course]) {
+        self.id = id
         _name = name
+        _coefficient = coefficient
         self.courses = courses
     }
 

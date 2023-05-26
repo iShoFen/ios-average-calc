@@ -1,13 +1,12 @@
 //
-//  File.swift
-//  
-//
 //  Created by etudiant on 25/05/2023.
 //
 
 import Foundation
 
-public struct Course {
+public struct Course: Identifiable {
+    public let id: UUID
+
     public var name: String {
         get { _name }
         set {
@@ -45,7 +44,8 @@ public struct Course {
     }
     private var _coefficient: Double
 
-    public init(name: String, mark: Double, coefficient: Double) {
+    public init(id: UUID = UUID(), name: String, mark: Double, coefficient: Double) {
+        self.id = id
         _name = name
         _mark = mark
         _coefficient = coefficient
