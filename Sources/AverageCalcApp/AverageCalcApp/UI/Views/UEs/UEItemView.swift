@@ -11,7 +11,7 @@ import AverageCalcViewModel
 
 struct UEItemView: View {
     @ObservedObject public var ueVM: UEVM
-    @State private var locked = false
+    @Binding var locked: Bool
     
     var body: some View {
         VStack {
@@ -32,6 +32,6 @@ struct UEItemView: View {
 struct UEItemView_Previews: PreviewProvider {
     static var previews: some View {
         let ueVM = UEVM(fromUE: loadAllUEs().first!)
-        UEItemView(ueVM: ueVM)
+        UEItemView(ueVM: ueVM, locked: .constant(false))
     }
 }

@@ -60,14 +60,6 @@ struct MarkSlider: View {
 
 struct MarkSlider_Previews: PreviewProvider {
     static var previews: some View {
-        var value = 20.0
-        var locked = false
-        MarkSlider(value: Binding<Double>(
-            get: { value },
-            set: { value = $0 }
-        ), locked: Binding<Bool>(
-            get: { locked },
-            set: { locked = $0 }
-        ), minValue: 0, maxValue: 20)
+        MarkSlider(value: .constant(10), locked: .constant(false), minValue: 0, maxValue: 20)
     }
 }

@@ -10,7 +10,7 @@ import AverageCalcStub
 import AverageCalcViewModel
 
 struct UEsView: View {
-    public var uesVM: UEsVM
+    @ObservedObject var uesVM: UEsVM
     
     var body: some View {
         LazyVStack(alignment: .leading) {
@@ -20,7 +20,7 @@ struct UEsView: View {
 
             ForEach(uesVM.ues) { ue in
                 HStack(spacing: 8) {
-                    UEItemView(ueVM: UEVM(fromUE: ue))
+                    UEItemView(ueVM: UEVM(fromUE: ue), locked: .constant(true))
                     NavigationLink(destination: Text(ue.name)) {
                         Image(systemName: "square.and.pencil")
                     }
