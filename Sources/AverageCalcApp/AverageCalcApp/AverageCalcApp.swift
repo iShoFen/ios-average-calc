@@ -1,19 +1,22 @@
 //
-//  AverageCalcModel.swift
-//  AverageCalcModel
+//  AverageCalcApp.swift
+//  AverageCalcApp
 //
-//  Created by etudiant on 25/05/2023.
+//  Created by Samuel SIRVEN on 25/05/2023.
 //
 
 import SwiftUI
 import AverageCalcStub
+import AverageCalcViewModel
 
 @main
 struct UCAverageApp: App {
+    @StateObject var uesVM = UEsVM(withUEs: loadAllUEs())
+    @StateObject var blocksVM = BlocksVM(withBlock: loadAllBlocks())
+    
     var body: some Scene {
         WindowGroup {
-            let stub = Stub()
-            HomePage(stub: stub)
+            HomePage(blocksVM: blocksVM, uesVM: uesVM)
         }
     }
 }

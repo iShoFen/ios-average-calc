@@ -2,15 +2,15 @@
 //  UEsView.swift
 //  AverageCalcApp
 //
-//  Created by etudiant on 25/05/2023.
+//  Created by Samuel SIRVEN on 25/05/2023.
 //
 
 import SwiftUI
-import AverageCalcModel
 import AverageCalcStub
+import AverageCalcViewModel
 
 struct UEsView: View {
-    public var ues: [UE]
+    public var uesVM: UEsVM
     
     var body: some View {
         LazyVStack(alignment: .leading) {
@@ -18,9 +18,9 @@ struct UEsView: View {
                 .font(.title)
             Text("Détail des UEs")
 
-            ForEach(ues) { ue in
+            ForEach(uesVM.ues) { ue in
                 HStack(spacing: 8) {
-                    UEItem(ue: ue)
+                    UEItemView(ueVM: UEVM(fromUE: ue))
                     NavigationLink(destination: Text(ue.name)) {
                         Image(systemName: "square.and.pencil")
                     }
@@ -37,7 +37,7 @@ struct UEsView: View {
 
 struct UEsView_Previews: PreviewProvider {
     static var previews: some View {
-        let stub = Stub()
-        UEsView(ues: stub.getAllUEs())
+        let uesVM = UEsVM(withUEs: loadAllUEs())
+        UEsView(uesVM: uesVM)
     }
 }
