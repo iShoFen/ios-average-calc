@@ -46,15 +46,19 @@ public class CourseVM: ObservableObject {
         model = course.data
     }
 
-    func onEditing() {
+    public func onEditing() {
         model = original.data
         isEditing = true
     }
 
-    func onEdited(isCancelled: Bool) {
+    public func onEdited(isCancelled: Bool = false) {
         if !isCancelled {
             original.update(from: model)
         }
         isEditing = false
+    }
+    
+    public func toggleEditing() {
+        isEditing ? onEdited() : onEditing()
     }
 }

@@ -51,12 +51,12 @@ public class BlockVM: ObservableObject {
         model = block.data
     }
 
-    func onEditing() {
+    public func onEditing() {
         model = original.data
         isEditing = true
     }
 
-    func tryAddUE(ue: UE.Data) -> Bool {
+    public func tryAddUE(ue: UE.Data) -> Bool {
         if isEditing && original.canAddUE(ue.toUE()) {
             model.ues.append(ue)
             return true
@@ -64,7 +64,7 @@ public class BlockVM: ObservableObject {
         return false
     }
 
-    func tryRemoveUE(ue: UE.Data) -> Bool {
+    public func tryRemoveUE(ue: UE.Data) -> Bool {
         if isEditing && original.canRemoveUE(ue.toUE()) {
             model.ues.removeAll { $0.id == ue.id }
             return true
@@ -72,7 +72,7 @@ public class BlockVM: ObservableObject {
         return false
     }
 
-    func onEdited(isCancelled: Bool) -> Bool {
+    public func onEdited(isCancelled: Bool = false) -> Bool {
         var result = false
         if !isCancelled {
            result = original.update(from: model)

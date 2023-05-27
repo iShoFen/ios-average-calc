@@ -53,12 +53,12 @@ public class UEVM: ObservableObject {
         model = ue.data
     }
 
-    func onEditing() {
+    public func onEditing() {
         model = original.data
         isEditing = true
     }
 
-    func tryAddCourse(course: Course.Data) -> Bool {
+    public func tryAddCourse(course: Course.Data) -> Bool {
         if isEditing && original.canAddCourse(course.toCourse()) {
             model.courses.append(course)
 
@@ -68,7 +68,7 @@ public class UEVM: ObservableObject {
         return false
     }
     
-    func tryRemoveCourse(course: Course.Data) -> Bool {
+    public func tryRemoveCourse(course: Course.Data) -> Bool {
         if isEditing && original.canRemoveCourse(course.toCourse()) {
             model.courses.removeAll(where: { $0.id == course.id })
 
@@ -78,7 +78,7 @@ public class UEVM: ObservableObject {
         return false
     }
 
-    func onEdited(isCancelled: Bool) -> Bool {
+    public func onEdited(isCancelled: Bool = false) -> Bool {
         var result = false
         if !isCancelled {
            result = original.update(from: model)
