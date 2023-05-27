@@ -7,168 +7,236 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EC64F0B62A1FB1500079CFFE /* AverageCalcStub in Frameworks */ = {isa = PBXBuildFile; productRef = EC64F0B52A1FB1500079CFFE /* AverageCalcStub */; };
-		EC64F0B82A1FF8CC0079CFFE /* BlocksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC64F0B72A1FF8CC0079CFFE /* BlocksView.swift */; };
-		EC64F0BB2A1FFA670079CFFE /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC64F0BA2A1FFA670079CFFE /* Colors.xcassets */; };
-		EC64F0BD2A1FFAEB0079CFFE /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC64F0BC2A1FFAEB0079CFFE /* Colors.swift */; };
-		EC64F0C22A2000B20079CFFE /* BlockItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC64F0C12A2000B20079CFFE /* BlockItem.swift */; };
-		EC64F0C52A2005990079CFFE /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC64F0C42A2005990079CFFE /* Double.swift */; };
-		EC64F0C82A200C8F0079CFFE /* UEsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC64F0C72A200C8F0079CFFE /* UEsView.swift */; };
-		EC64F0CA2A20108F0079CFFE /* UEItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC64F0C92A20108F0079CFFE /* UEItem.swift */; };
-		EC64F0CF2A203CE30079CFFE /* MarkSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC64F0CE2A203CE30079CFFE /* MarkSlider.swift */; };
-		ECDA041D2A1EAF7E007B6A3B /* AverageCalcApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDA041C2A1EAF7E007B6A3B /* AverageCalcApp.swift */; };
-		ECDA041F2A1EAF7E007B6A3B /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDA041E2A1EAF7E007B6A3B /* HomePage.swift */; };
-		ECDA04212A1EAF7E007B6A3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECDA04202A1EAF7E007B6A3B /* Assets.xcassets */; };
-		ECDA04242A1EAF7E007B6A3B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECDA04232A1EAF7E007B6A3B /* Preview Assets.xcassets */; };
-		ECDA042C2A1EAFE2007B6A3B /* AverageCalcModel in Frameworks */ = {isa = PBXBuildFile; productRef = ECDA042B2A1EAFE2007B6A3B /* AverageCalcModel */; };
+		EC03A83D2A22500C00B1F488 /* AverageCalcStub in Frameworks */ = {isa = PBXBuildFile; productRef = EC03A83C2A22500C00B1F488 /* AverageCalcStub */; };
+		EC03A83F2A22500F00B1F488 /* AverageCalcViewModel in Frameworks */ = {isa = PBXBuildFile; productRef = EC03A83E2A22500F00B1F488 /* AverageCalcViewModel */; };
+		EC03A8412A22506700B1F488 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03A8402A22506700B1F488 /* Double.swift */; };
+		EC03A8432A22509000B1F488 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03A8422A22509000B1F488 /* Colors.swift */; };
+		EC03A8452A22509A00B1F488 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC03A8442A22509A00B1F488 /* Colors.xcassets */; };
+		EC03A8472A22520500B1F488 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03A8462A22520500B1F488 /* HomePage.swift */; };
+		EC03A8492A22520D00B1F488 /* BlockItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03A8482A22520D00B1F488 /* BlockItemView.swift */; };
+		EC03A84B2A22521600B1F488 /* BlocksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03A84A2A22521600B1F488 /* BlocksView.swift */; };
+		EC03A84D2A22522100B1F488 /* UEItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03A84C2A22522100B1F488 /* UEItemView.swift */; };
+		EC03A84F2A22522700B1F488 /* UEsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03A84E2A22522700B1F488 /* UEsView.swift */; };
+		EC03A8512A22523200B1F488 /* MarkSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03A8502A22523200B1F488 /* MarkSlider.swift */; };
+		EC6E4EFF2A224E5E005451F4 /* AverageCalcApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6E4EFE2A224E5E005451F4 /* AverageCalcApp.swift */; };
+		EC6E4F032A224E5E005451F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC6E4F022A224E5E005451F4 /* Assets.xcassets */; };
+		EC6E4F062A224E5E005451F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC6E4F052A224E5E005451F4 /* Preview Assets.xcassets */; };
+		EC6E4F102A224E5F005451F4 /* AverageCalcAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6E4F0F2A224E5F005451F4 /* AverageCalcAppTests.swift */; };
+		EC6E4F1A2A224E5F005451F4 /* AverageCalcAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6E4F192A224E5F005451F4 /* AverageCalcAppUITests.swift */; };
+		EC6E4F1C2A224E5F005451F4 /* AverageCalcAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6E4F1B2A224E5F005451F4 /* AverageCalcAppUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		EC6E4F0C2A224E5F005451F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC6E4EF32A224E5E005451F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC6E4EFA2A224E5E005451F4;
+			remoteInfo = AverageCalcApp;
+		};
+		EC6E4F162A224E5F005451F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC6E4EF32A224E5E005451F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC6E4EFA2A224E5E005451F4;
+			remoteInfo = AverageCalcApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		EC64F0B72A1FF8CC0079CFFE /* BlocksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksView.swift; sourceTree = "<group>"; };
-		EC64F0BA2A1FFA670079CFFE /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		EC64F0BC2A1FFAEB0079CFFE /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		EC64F0C12A2000B20079CFFE /* BlockItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockItem.swift; sourceTree = "<group>"; };
-		EC64F0C42A2005990079CFFE /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
-		EC64F0C72A200C8F0079CFFE /* UEsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UEsView.swift; sourceTree = "<group>"; };
-		EC64F0C92A20108F0079CFFE /* UEItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UEItem.swift; sourceTree = "<group>"; };
-		EC64F0CE2A203CE30079CFFE /* MarkSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkSlider.swift; sourceTree = "<group>"; };
-		ECDA04192A1EAF7E007B6A3B /* AverageCalcApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AverageCalcApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		ECDA041C2A1EAF7E007B6A3B /* AverageCalcApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageCalcApp.swift; sourceTree = "<group>"; };
-		ECDA041E2A1EAF7E007B6A3B /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
-		ECDA04202A1EAF7E007B6A3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		ECDA04232A1EAF7E007B6A3B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EC03A8402A22506700B1F488 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		EC03A8422A22509000B1F488 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		EC03A8442A22509A00B1F488 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		EC03A8462A22520500B1F488 /* HomePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
+		EC03A8482A22520D00B1F488 /* BlockItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockItemView.swift; sourceTree = "<group>"; };
+		EC03A84A2A22521600B1F488 /* BlocksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlocksView.swift; sourceTree = "<group>"; };
+		EC03A84C2A22522100B1F488 /* UEItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UEItemView.swift; sourceTree = "<group>"; };
+		EC03A84E2A22522700B1F488 /* UEsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UEsView.swift; sourceTree = "<group>"; };
+		EC03A8502A22523200B1F488 /* MarkSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkSlider.swift; sourceTree = "<group>"; };
+		EC6E4EFB2A224E5E005451F4 /* AverageCalcApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AverageCalcApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC6E4EFE2A224E5E005451F4 /* AverageCalcApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageCalcApp.swift; sourceTree = "<group>"; };
+		EC6E4F022A224E5E005451F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EC6E4F052A224E5E005451F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EC6E4F0B2A224E5F005451F4 /* AverageCalcAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AverageCalcAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC6E4F0F2A224E5F005451F4 /* AverageCalcAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageCalcAppTests.swift; sourceTree = "<group>"; };
+		EC6E4F152A224E5F005451F4 /* AverageCalcAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AverageCalcAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC6E4F192A224E5F005451F4 /* AverageCalcAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageCalcAppUITests.swift; sourceTree = "<group>"; };
+		EC6E4F1B2A224E5F005451F4 /* AverageCalcAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageCalcAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		ECDA04162A1EAF7E007B6A3B /* Frameworks */ = {
+		EC6E4EF82A224E5E005451F4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECDA042C2A1EAFE2007B6A3B /* AverageCalcModel in Frameworks */,
-				EC64F0B62A1FB1500079CFFE /* AverageCalcStub in Frameworks */,
+				EC03A83F2A22500F00B1F488 /* AverageCalcViewModel in Frameworks */,
+				EC03A83D2A22500C00B1F488 /* AverageCalcStub in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC6E4F082A224E5F005451F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC6E4F122A224E5F005451F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EC64F0B32A1FAADC0079CFFE /* Pages */ = {
+		EC03A8332A224F4E00B1F488 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				ECDA041E2A1EAF7E007B6A3B /* HomePage.swift */,
-			);
-			path = Pages;
-			sourceTree = "<group>";
-		};
-		EC64F0B42A1FAAE30079CFFE /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				EC64F0CB2A2016390079CFFE /* Utilities */,
-				EC64F0C62A200C4B0079CFFE /* UEs */,
-				EC64F0BE2A2000420079CFFE /* Blocks */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		EC64F0B92A1FFA400079CFFE /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				ECDA04202A1EAF7E007B6A3B /* Assets.xcassets */,
-				EC64F0BA2A1FFA670079CFFE /* Colors.xcassets */,
-				EC64F0BC2A1FFAEB0079CFFE /* Colors.swift */,
+				EC6E4F022A224E5E005451F4 /* Assets.xcassets */,
+				EC03A8442A22509A00B1F488 /* Colors.xcassets */,
+				EC03A8422A22509000B1F488 /* Colors.swift */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		EC64F0BE2A2000420079CFFE /* Blocks */ = {
+		EC03A8342A224F5B00B1F488 /* Converters */ = {
 			isa = PBXGroup;
 			children = (
-				EC64F0B72A1FF8CC0079CFFE /* BlocksView.swift */,
-				EC64F0C12A2000B20079CFFE /* BlockItem.swift */,
+				EC03A8402A22506700B1F488 /* Double.swift */,
 			);
-			path = Blocks;
+			path = Converters;
 			sourceTree = "<group>";
 		};
-		EC64F0C32A2005790079CFFE /* Formaters */ = {
+		EC03A8352A224FB300B1F488 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				EC64F0C42A2005990079CFFE /* Double.swift */,
+				EC03A8382A224FE500B1F488 /* Components */,
+				EC03A8372A224FDF00B1F488 /* Pages */,
+				EC03A8362A224FD600B1F488 /* Views */,
 			);
-			path = Formaters;
+			path = UI;
 			sourceTree = "<group>";
 		};
-		EC64F0C62A200C4B0079CFFE /* UEs */ = {
+		EC03A8362A224FD600B1F488 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EC64F0C72A200C8F0079CFFE /* UEsView.swift */,
-				EC64F0C92A20108F0079CFFE /* UEItem.swift */,
+				EC03A83A2A224FFC00B1F488 /* Blocks */,
+				EC03A8392A224FF200B1F488 /* UEs */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EC03A8372A224FDF00B1F488 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				EC03A8462A22520500B1F488 /* HomePage.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		EC03A8382A224FE500B1F488 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EC03A8502A22523200B1F488 /* MarkSlider.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		EC03A8392A224FF200B1F488 /* UEs */ = {
+			isa = PBXGroup;
+			children = (
+				EC03A84E2A22522700B1F488 /* UEsView.swift */,
+				EC03A84C2A22522100B1F488 /* UEItemView.swift */,
 			);
 			path = UEs;
 			sourceTree = "<group>";
 		};
-		EC64F0CB2A2016390079CFFE /* Utilities */ = {
+		EC03A83A2A224FFC00B1F488 /* Blocks */ = {
 			isa = PBXGroup;
 			children = (
-				EC64F0CE2A203CE30079CFFE /* MarkSlider.swift */,
+				EC03A84A2A22521600B1F488 /* BlocksView.swift */,
+				EC03A8482A22520D00B1F488 /* BlockItemView.swift */,
 			);
-			path = Utilities;
+			path = Blocks;
 			sourceTree = "<group>";
 		};
-		ECDA04102A1EAF7E007B6A3B = {
-			isa = PBXGroup;
-			children = (
-				ECDA041B2A1EAF7E007B6A3B /* AverageCalcApp */,
-				ECDA041A2A1EAF7E007B6A3B /* Products */,
-				ECDA042A2A1EAFE2007B6A3B /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		ECDA041A2A1EAF7E007B6A3B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				ECDA04192A1EAF7E007B6A3B /* AverageCalcApp.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		ECDA041B2A1EAF7E007B6A3B /* AverageCalcApp */ = {
-			isa = PBXGroup;
-			children = (
-				EC64F0B92A1FFA400079CFFE /* Assets */,
-				EC64F0C32A2005790079CFFE /* Formaters */,
-				EC64F0B42A1FAAE30079CFFE /* Views */,
-				EC64F0B32A1FAADC0079CFFE /* Pages */,
-				ECDA041C2A1EAF7E007B6A3B /* AverageCalcApp.swift */,
-				ECDA04222A1EAF7E007B6A3B /* Preview Content */,
-			);
-			path = AverageCalcApp;
-			sourceTree = "<group>";
-		};
-		ECDA04222A1EAF7E007B6A3B /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				ECDA04232A1EAF7E007B6A3B /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		ECDA042A2A1EAFE2007B6A3B /* Frameworks */ = {
+		EC03A83B2A22500C00B1F488 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EC6E4EF22A224E5E005451F4 = {
+			isa = PBXGroup;
+			children = (
+				EC6E4EFD2A224E5E005451F4 /* AverageCalcApp */,
+				EC6E4F0E2A224E5F005451F4 /* AverageCalcAppTests */,
+				EC6E4F182A224E5F005451F4 /* AverageCalcAppUITests */,
+				EC6E4EFC2A224E5E005451F4 /* Products */,
+				EC03A83B2A22500C00B1F488 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		EC6E4EFC2A224E5E005451F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC6E4EFB2A224E5E005451F4 /* AverageCalcApp.app */,
+				EC6E4F0B2A224E5F005451F4 /* AverageCalcAppTests.xctest */,
+				EC6E4F152A224E5F005451F4 /* AverageCalcAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EC6E4EFD2A224E5E005451F4 /* AverageCalcApp */ = {
+			isa = PBXGroup;
+			children = (
+				EC03A8332A224F4E00B1F488 /* Assets */,
+				EC03A8342A224F5B00B1F488 /* Converters */,
+				EC6E4F042A224E5E005451F4 /* Preview Content */,
+				EC03A8352A224FB300B1F488 /* UI */,
+				EC6E4EFE2A224E5E005451F4 /* AverageCalcApp.swift */,
+			);
+			path = AverageCalcApp;
+			sourceTree = "<group>";
+		};
+		EC6E4F042A224E5E005451F4 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				EC6E4F052A224E5E005451F4 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		EC6E4F0E2A224E5F005451F4 /* AverageCalcAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				EC6E4F0F2A224E5F005451F4 /* AverageCalcAppTests.swift */,
+			);
+			path = AverageCalcAppTests;
+			sourceTree = "<group>";
+		};
+		EC6E4F182A224E5F005451F4 /* AverageCalcAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EC6E4F192A224E5F005451F4 /* AverageCalcAppUITests.swift */,
+				EC6E4F1B2A224E5F005451F4 /* AverageCalcAppUITestsLaunchTests.swift */,
+			);
+			path = AverageCalcAppUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		ECDA04182A1EAF7E007B6A3B /* AverageCalcApp */ = {
+		EC6E4EFA2A224E5E005451F4 /* AverageCalcApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ECDA04272A1EAF7E007B6A3B /* Build configuration list for PBXNativeTarget "AverageCalcApp" */;
+			buildConfigurationList = EC6E4F1F2A224E5F005451F4 /* Build configuration list for PBXNativeTarget "AverageCalcApp" */;
 			buildPhases = (
-				ECDA04152A1EAF7E007B6A3B /* Sources */,
-				ECDA04162A1EAF7E007B6A3B /* Frameworks */,
-				ECDA04172A1EAF7E007B6A3B /* Resources */,
+				EC6E4EF72A224E5E005451F4 /* Sources */,
+				EC6E4EF82A224E5E005451F4 /* Frameworks */,
+				EC6E4EF92A224E5E005451F4 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -176,29 +244,73 @@
 			);
 			name = AverageCalcApp;
 			packageProductDependencies = (
-				ECDA042B2A1EAFE2007B6A3B /* AverageCalcModel */,
-				EC64F0B52A1FB1500079CFFE /* AverageCalcStub */,
+				EC03A83C2A22500C00B1F488 /* AverageCalcStub */,
+				EC03A83E2A22500F00B1F488 /* AverageCalcViewModel */,
 			);
 			productName = AverageCalcApp;
-			productReference = ECDA04192A1EAF7E007B6A3B /* AverageCalcApp.app */;
+			productReference = EC6E4EFB2A224E5E005451F4 /* AverageCalcApp.app */;
 			productType = "com.apple.product-type.application";
+		};
+		EC6E4F0A2A224E5F005451F4 /* AverageCalcAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC6E4F222A224E5F005451F4 /* Build configuration list for PBXNativeTarget "AverageCalcAppTests" */;
+			buildPhases = (
+				EC6E4F072A224E5F005451F4 /* Sources */,
+				EC6E4F082A224E5F005451F4 /* Frameworks */,
+				EC6E4F092A224E5F005451F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC6E4F0D2A224E5F005451F4 /* PBXTargetDependency */,
+			);
+			name = AverageCalcAppTests;
+			productName = AverageCalcAppTests;
+			productReference = EC6E4F0B2A224E5F005451F4 /* AverageCalcAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EC6E4F142A224E5F005451F4 /* AverageCalcAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC6E4F252A224E5F005451F4 /* Build configuration list for PBXNativeTarget "AverageCalcAppUITests" */;
+			buildPhases = (
+				EC6E4F112A224E5F005451F4 /* Sources */,
+				EC6E4F122A224E5F005451F4 /* Frameworks */,
+				EC6E4F132A224E5F005451F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC6E4F172A224E5F005451F4 /* PBXTargetDependency */,
+			);
+			name = AverageCalcAppUITests;
+			productName = AverageCalcAppUITests;
+			productReference = EC6E4F152A224E5F005451F4 /* AverageCalcAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		ECDA04112A1EAF7E007B6A3B /* Project object */ = {
+		EC6E4EF32A224E5E005451F4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
-					ECDA04182A1EAF7E007B6A3B = {
+					EC6E4EFA2A224E5E005451F4 = {
 						CreatedOnToolsVersion = 14.3;
+					};
+					EC6E4F0A2A224E5F005451F4 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = EC6E4EFA2A224E5E005451F4;
+					};
+					EC6E4F142A224E5F005451F4 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = EC6E4EFA2A224E5E005451F4;
 					};
 				};
 			};
-			buildConfigurationList = ECDA04142A1EAF7E007B6A3B /* Build configuration list for PBXProject "AverageCalcApp" */;
+			buildConfigurationList = EC6E4EF62A224E5E005451F4 /* Build configuration list for PBXProject "AverageCalcApp" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -206,50 +318,96 @@
 				en,
 				Base,
 			);
-			mainGroup = ECDA04102A1EAF7E007B6A3B;
-			productRefGroup = ECDA041A2A1EAF7E007B6A3B /* Products */;
+			mainGroup = EC6E4EF22A224E5E005451F4;
+			productRefGroup = EC6E4EFC2A224E5E005451F4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				ECDA04182A1EAF7E007B6A3B /* AverageCalcApp */,
+				EC6E4EFA2A224E5E005451F4 /* AverageCalcApp */,
+				EC6E4F0A2A224E5F005451F4 /* AverageCalcAppTests */,
+				EC6E4F142A224E5F005451F4 /* AverageCalcAppUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		ECDA04172A1EAF7E007B6A3B /* Resources */ = {
+		EC6E4EF92A224E5E005451F4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC64F0BB2A1FFA670079CFFE /* Colors.xcassets in Resources */,
-				ECDA04242A1EAF7E007B6A3B /* Preview Assets.xcassets in Resources */,
-				ECDA04212A1EAF7E007B6A3B /* Assets.xcassets in Resources */,
+				EC03A8452A22509A00B1F488 /* Colors.xcassets in Resources */,
+				EC6E4F062A224E5E005451F4 /* Preview Assets.xcassets in Resources */,
+				EC6E4F032A224E5E005451F4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC6E4F092A224E5F005451F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC6E4F132A224E5F005451F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		ECDA04152A1EAF7E007B6A3B /* Sources */ = {
+		EC6E4EF72A224E5E005451F4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC64F0CA2A20108F0079CFFE /* UEItem.swift in Sources */,
-				EC64F0CF2A203CE30079CFFE /* MarkSlider.swift in Sources */,
-				EC64F0B82A1FF8CC0079CFFE /* BlocksView.swift in Sources */,
-				EC64F0BD2A1FFAEB0079CFFE /* Colors.swift in Sources */,
-				EC64F0C82A200C8F0079CFFE /* UEsView.swift in Sources */,
-				ECDA041F2A1EAF7E007B6A3B /* HomePage.swift in Sources */,
-				ECDA041D2A1EAF7E007B6A3B /* AverageCalcApp.swift in Sources */,
-				EC64F0C52A2005990079CFFE /* Double.swift in Sources */,
-				EC64F0C22A2000B20079CFFE /* BlockItem.swift in Sources */,
+				EC03A84F2A22522700B1F488 /* UEsView.swift in Sources */,
+				EC03A8512A22523200B1F488 /* MarkSlider.swift in Sources */,
+				EC03A84B2A22521600B1F488 /* BlocksView.swift in Sources */,
+				EC03A8412A22506700B1F488 /* Double.swift in Sources */,
+				EC03A8432A22509000B1F488 /* Colors.swift in Sources */,
+				EC6E4EFF2A224E5E005451F4 /* AverageCalcApp.swift in Sources */,
+				EC03A8472A22520500B1F488 /* HomePage.swift in Sources */,
+				EC03A84D2A22522100B1F488 /* UEItemView.swift in Sources */,
+				EC03A8492A22520D00B1F488 /* BlockItemView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC6E4F072A224E5F005451F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC6E4F102A224E5F005451F4 /* AverageCalcAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC6E4F112A224E5F005451F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC6E4F1A2A224E5F005451F4 /* AverageCalcAppUITests.swift in Sources */,
+				EC6E4F1C2A224E5F005451F4 /* AverageCalcAppUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		EC6E4F0D2A224E5F005451F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC6E4EFA2A224E5E005451F4 /* AverageCalcApp */;
+			targetProxy = EC6E4F0C2A224E5F005451F4 /* PBXContainerItemProxy */;
+		};
+		EC6E4F172A224E5F005451F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC6E4EFA2A224E5E005451F4 /* AverageCalcApp */;
+			targetProxy = EC6E4F162A224E5F005451F4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
-		ECDA04252A1EAF7E007B6A3B /* Debug */ = {
+		EC6E4F1D2A224E5F005451F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -309,7 +467,7 @@
 			};
 			name = Debug;
 		};
-		ECDA04262A1EAF7E007B6A3B /* Release */ = {
+		EC6E4F1E2A224E5F005451F4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -363,12 +521,11 @@
 			};
 			name = Release;
 		};
-		ECDA04282A1EAF7E007B6A3B /* Debug */ = {
+		EC6E4F202A224E5F005451F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AverageCalcApp/Preview Content\"";
@@ -385,21 +542,19 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = fr.uca.iut.AverageCalcApp;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.uca.iut.pm.AverageCalcApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		ECDA04292A1EAF7E007B6A3B /* Release */ = {
+		EC6E4F212A224E5F005451F4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AverageCalcApp/Preview Content\"";
@@ -416,32 +571,125 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = fr.uca.iut.AverageCalcApp;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.uca.iut.pm.AverageCalcApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
+		EC6E4F232A224E5F005451F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J9G38B6NUU;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.uca.iut.pm.AverageCalcAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AverageCalcApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AverageCalcApp";
+			};
+			name = Debug;
+		};
+		EC6E4F242A224E5F005451F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J9G38B6NUU;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.uca.iut.pm.AverageCalcAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AverageCalcApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AverageCalcApp";
+			};
+			name = Release;
+		};
+		EC6E4F262A224E5F005451F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J9G38B6NUU;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.uca.iut.pm.AverageCalcAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AverageCalcApp;
+			};
+			name = Debug;
+		};
+		EC6E4F272A224E5F005451F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J9G38B6NUU;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.uca.iut.pm.AverageCalcAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AverageCalcApp;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		ECDA04142A1EAF7E007B6A3B /* Build configuration list for PBXProject "AverageCalcApp" */ = {
+		EC6E4EF62A224E5E005451F4 /* Build configuration list for PBXProject "AverageCalcApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				ECDA04252A1EAF7E007B6A3B /* Debug */,
-				ECDA04262A1EAF7E007B6A3B /* Release */,
+				EC6E4F1D2A224E5F005451F4 /* Debug */,
+				EC6E4F1E2A224E5F005451F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ECDA04272A1EAF7E007B6A3B /* Build configuration list for PBXNativeTarget "AverageCalcApp" */ = {
+		EC6E4F1F2A224E5F005451F4 /* Build configuration list for PBXNativeTarget "AverageCalcApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				ECDA04282A1EAF7E007B6A3B /* Debug */,
-				ECDA04292A1EAF7E007B6A3B /* Release */,
+				EC6E4F202A224E5F005451F4 /* Debug */,
+				EC6E4F212A224E5F005451F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC6E4F222A224E5F005451F4 /* Build configuration list for PBXNativeTarget "AverageCalcAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC6E4F232A224E5F005451F4 /* Debug */,
+				EC6E4F242A224E5F005451F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC6E4F252A224E5F005451F4 /* Build configuration list for PBXNativeTarget "AverageCalcAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC6E4F262A224E5F005451F4 /* Debug */,
+				EC6E4F272A224E5F005451F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -449,15 +697,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		EC64F0B52A1FB1500079CFFE /* AverageCalcStub */ = {
+		EC03A83C2A22500C00B1F488 /* AverageCalcStub */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AverageCalcStub;
 		};
-		ECDA042B2A1EAFE2007B6A3B /* AverageCalcModel */ = {
+		EC03A83E2A22500F00B1F488 /* AverageCalcViewModel */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = AverageCalcModel;
+			productName = AverageCalcViewModel;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = ECDA04112A1EAF7E007B6A3B /* Project object */;
+	rootObject = EC6E4EF32A224E5E005451F4 /* Project object */;
 }

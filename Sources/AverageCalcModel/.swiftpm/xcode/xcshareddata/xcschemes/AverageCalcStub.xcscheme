@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AverageCalcModel"
-               BuildableName = "AverageCalcModel"
-               BlueprintName = "AverageCalcModel"
+               BlueprintIdentifier = "AverageCalcStub"
+               BuildableName = "AverageCalcStub"
+               BlueprintName = "AverageCalcStub"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -49,9 +49,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AverageCalcModel"
-            BuildableName = "AverageCalcModel"
-            BlueprintName = "AverageCalcModel"
+            BlueprintIdentifier = "AverageCalcStub"
+            BuildableName = "AverageCalcStub"
+            BlueprintName = "AverageCalcStub"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>

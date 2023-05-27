@@ -2,10 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:AverageCalcViewModel">
+      location = "group:AverageCalcModel">
    </FileRef>
    <FileRef
-      location = "group:AverageCalcModel">
+      location = "group:AverageCalcViewModel">
    </FileRef>
    <FileRef
       location = "group:AverageCalcApp/AverageCalcApp.xcodeproj">
