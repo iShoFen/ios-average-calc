@@ -1,10 +1,21 @@
 //
-//  Created by etudiant on 25/05/2023.
+//  Course.swift
+//  AverageCalcModel
+//
+//  Created by Samuel SIRVEN on 25/05/2023.
 //
 
 import Foundation
 
-public struct Course: Identifiable {
+public struct Course: Identifiable, Hashable {
+    public static func == (lhs: Course, rhs: Course) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
     public let id: UUID
 
     public var name: String {

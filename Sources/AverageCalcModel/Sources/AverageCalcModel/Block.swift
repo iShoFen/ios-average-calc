@@ -1,26 +1,33 @@
 //
-// Created by etudiant on 25/05/2023.
+//  Block.swift
+//  AverageCalcModel
+//
+//  Created by Samuel SIRVEN on 25/05/2023.
 //
 
 import Foundation
 
 public struct Block: Identifiable {
+    public static func == (lhs: Block, rhs: Block) -> Bool {
+        lhs.id == rhs.id || lhs.name == rhs.name
+    }
+    
     public let id: UUID
-
+    
     public var name: String {
         get { _name }
         set {
             guard !newValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
                 return
             }
-
+            
             _name = newValue
         }
     }
     private var _name: String
-
+    
     public private(set) var ues: [UE]
-
+    
     public var average: Double {
         get {
             var average = 0.0
@@ -30,34 +37,54 @@ public struct Block: Identifiable {
                 average += ue.average * ue.coefficient
                 coefficient += ue.coefficient
             }
-
+            
             return average / coefficient
         }
     }
-
+    
     public init(id: UUID = UUID(), name: String, ues: [UE]) {
         self.id = id
         _name = name
         self.ues = ues
     }
-
+    
+    public func canAddUE(_ ue: UE) -> Bool {
+        !ues.contains(where: { $0.name == ue.name })
+    }
+    
     public mutating func addUE(_ ue: UE) -> Bool {
-        guard !ues.contains(where: { $0.name == ue.name }) else {
+        guard canAddUE(ue) else {
             return false
         }
-
         ues.append(ue)
-
+        
         return true
     }
 
+    public func canRemoveUE(_ ue: UE) -> Bool {
+        ues.contains(where: { $0.name == ue.name })
+    }
+
     public mutating func removeUE(_ ue: UE) -> Bool {
-        guard let index = ues.firstIndex(where: { $0.name == ue.name }) else {
+        guard canRemoveUE(ue) else {
             return false
         }
+        
+        ues.remove(at: ues.firstIndex(where: { $0.name == ue.name })!)
+        
+        return true
+    }
 
-        ues.remove(at: index)
-
+    public mutating func updateUEs(from ues: [UE]) -> Bool {
+        let ids = ues.map { $0.id }
+        let names = ues.map { $0.name }
+        
+        guard Set(ids).count == ids.count && Set(names).count == names.count else {
+            return false
+        }
+        
+        self.ues = ues
+        
         return true
     }
 }
