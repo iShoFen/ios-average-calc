@@ -20,8 +20,8 @@ struct UEsView: View {
 
             ForEach(uesVM.ues) { ue in
                 HStack(spacing: 8) {
-                    UEItemView(ueVM: UEVM(fromUE: ue), locked: .constant(true))
-                    NavigationLink(destination: Text(ue.name)) {
+                    UEItemView(ueVM: UEVM(fromUE: ue))
+                    NavigationLink(destination: UEDetailPage(ueVM: UEVM(fromUE: ue), uesVM: uesVM)) {
                         Image(systemName: "square.and.pencil")
                     }
                     Divider()
