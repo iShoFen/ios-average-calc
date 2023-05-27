@@ -2,7 +2,7 @@
 //  MarkSlider.swift
 //  AverageCalcApp
 //
-//  Created by etudiant on 26/05/2023.
+//  Created by Samuel SIRVEN on 26/05/2023.
 //
 
 import SwiftUI
