@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MarkSlider: View {
     @Binding var value: Double
-    @Binding var locked: Bool
+    @Binding var isEditable: Bool
     let minValue: Double
     let maxValue: Double
     
@@ -18,7 +18,7 @@ struct MarkSlider: View {
             HStack {
                 let dragGesture = DragGesture()
                     .onChanged { gesture in
-                        if !locked { updateValue(gesture, geometry) }
+                        if isEditable { updateValue(gesture, geometry) }
                     }
                 
                 Rectangle()
@@ -60,6 +60,6 @@ struct MarkSlider: View {
 
 struct MarkSlider_Previews: PreviewProvider {
     static var previews: some View {
-        MarkSlider(value: .constant(10), locked: .constant(false), minValue: 0, maxValue: 20)
+        MarkSlider(value: .constant(10), isEditable: .constant(false), minValue: 0, maxValue: 20)
     }
 }

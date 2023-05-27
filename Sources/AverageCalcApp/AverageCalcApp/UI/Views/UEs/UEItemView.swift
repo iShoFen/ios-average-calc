@@ -11,7 +11,6 @@ import AverageCalcViewModel
 
 struct UEItemView: View {
     @ObservedObject public var ueVM: UEVM
-    @Binding var locked: Bool
     
     var body: some View {
         VStack {
@@ -21,7 +20,7 @@ struct UEItemView: View {
                 Text(String(ueVM.model.coefficient)).padding(.trailing, 10)
             }
             
-            MarkSlider(value: $ueVM.model.average, locked: $locked, minValue: 0, maxValue: 20)
+            MarkSlider(value: $ueVM.model.average, isEditable: .constant(false), minValue: 0, maxValue: 20)
                 .padding(.trailing, 60)
             
             Divider()
@@ -32,6 +31,6 @@ struct UEItemView: View {
 struct UEItemView_Previews: PreviewProvider {
     static var previews: some View {
         let ueVM = UEVM(fromUE: loadAllUEs().first!)
-        UEItemView(ueVM: ueVM, locked: .constant(false))
+        UEItemView(ueVM: ueVM)
     }
 }
