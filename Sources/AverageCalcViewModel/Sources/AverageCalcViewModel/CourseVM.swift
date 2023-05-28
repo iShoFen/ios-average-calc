@@ -57,8 +57,4 @@ public class CourseVM: ObservableObject {
         }
         isEditing = false
     }
-    
-    public func toggleEditing() {
-        isEditing ? onEdited() : onEditing()
-    }
 }

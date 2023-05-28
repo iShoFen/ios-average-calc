@@ -13,7 +13,7 @@ public extension UE {
         public let id: UUID
         public var name: String
         public var coefficient: Double
-        public fileprivate(set) var courses: [Course.Data]
+        public var courses: [Course.Data]
         public var average: Double
 
         func toUE() -> UE {
@@ -31,12 +31,15 @@ public extension UE {
 
     mutating func update(from data : Data) -> Bool {
         guard self.id == data.id else {
-            return true
+            return false
         }
+
+        let fail = !updateCourses(from: data.courses.map { $0.toCourse() })
+        if fail { return false }
 
         name = data.name
         coefficient = data.coefficient
-        return updateCourses(from: data.courses.map { $0.toCourse() })
+        return true
     }
 }
 
@@ -58,38 +61,26 @@ public class UEVM: ObservableObject {
         isEditing = true
     }
 
-    public func tryAddCourse(course: Course.Data) -> Bool {
-        if isEditing && original.canAddCourse(course.toCourse()) {
-            model.courses.append(course)
-
-            return true
-        }
-
-        return false
-    }
-    
-    public func tryRemoveCourse(course: Course.Data) -> Bool {
-        if isEditing && original.canRemoveCourse(course.toCourse()) {
-            model.courses.removeAll(where: { $0.id == course.id })
-
-            return true
-        }
-
-        return false
-    }
-
     public func onEdited(isCancelled: Bool = false) -> Bool {
-        var result = false
-        if !isCancelled {
-           result = original.update(from: model)
+        if isCancelled {
+            isEditing = false
+            model = original.data
+            return true
         }
-
-        if result {
+        
+        if original.update(from: model) {
             isEditing = false
 
             return true
         }
 
         return false
+    }
+
+    public func updateCourse(fromCourseVM courseVM: CourseVM) {
+        if let index = model.courses.firstIndex(where: { $0.id == courseVM.model.id }) {
+            model.courses[index] = courseVM.model
+            _ = onEdited()
+        }
     }
 }

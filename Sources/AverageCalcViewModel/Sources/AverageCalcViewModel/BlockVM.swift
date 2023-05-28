@@ -29,11 +29,13 @@ public extension Block {
 
     mutating func update(from data: Data) -> Bool {
         guard self.id == data.id else {
-            return true
+            return false
         }
+        let fail = !updateUEs(from: data.ues.map { $0.toUE() })
+        if fail { return false }
 
         name = data.name
-        return updateUEs(from: data.ues.map { $0.toUE() })
+        return true
     }
 }
 
@@ -56,22 +58,6 @@ public class BlockVM: ObservableObject {
         isEditing = true
     }
 
-    public func tryAddUE(ue: UE.Data) -> Bool {
-        if isEditing && original.canAddUE(ue.toUE()) {
-            model.ues.append(ue)
-            return true
-        }
-        return false
-    }
-
-    public func tryRemoveUE(ue: UE.Data) -> Bool {
-        if isEditing && original.canRemoveUE(ue.toUE()) {
-            model.ues.removeAll { $0.id == ue.id }
-            return true
-        }
-        return false
-    }
-
     public func onEdited(isCancelled: Bool = false) -> Bool {
         var result = false
         if !isCancelled {
@@ -85,5 +71,12 @@ public class BlockVM: ObservableObject {
         }
 
         return false
+    }
+    
+    public func updateUE(fromUEVM ueVM: UEVM) {
+        if let index = model.ues.firstIndex(where: { $0.id == ueVM.model.id }) {
+            model.ues[index] = ueVM.model
+            _ = onEdited()
+        }
     }
 }
