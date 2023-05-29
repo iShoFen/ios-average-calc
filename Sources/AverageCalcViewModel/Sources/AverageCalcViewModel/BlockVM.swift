@@ -12,7 +12,7 @@ public extension Block {
     struct Data: Identifiable {
         public let id: UUID
         public var name: String
-        public fileprivate(set) var ues: [UE.Data]
+        public var ues: [UE.Data]
         public var average: Double
 
         func toBlock() -> Block {
