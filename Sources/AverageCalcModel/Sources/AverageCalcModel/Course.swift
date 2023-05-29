@@ -7,13 +7,9 @@
 
 import Foundation
 
-public struct Course: Identifiable, Hashable {
+public struct Course: Identifiable {
     public static func == (lhs: Course, rhs: Course) -> Bool {
         lhs.id == rhs.id
-    }
-
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
     }
 
     public let id: UUID

@@ -51,7 +51,7 @@ struct UEDetailPage: View {
                     .toolbar {
                         ToolbarItem(placement: .confirmationAction) {
                             Button("Done") {
-                                ueError = !ucaVM.checkUENameAvailability(name: ueVM.model.name)
+                                ueError = !ucaVM.checkUENameAvailability(of: ueVM.model)
 
                                 if !ueError {
                                     coursesError = !ueVM.onEdited()

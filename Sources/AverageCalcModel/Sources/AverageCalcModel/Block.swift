@@ -9,7 +9,7 @@ import Foundation
 
 public struct Block: Identifiable {
     public static func == (lhs: Block, rhs: Block) -> Bool {
-        lhs.id == rhs.id || lhs.name == rhs.name
+        lhs.id == rhs.id
     }
     
     public let id: UUID

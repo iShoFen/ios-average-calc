@@ -59,12 +59,13 @@ public class BlockVM: ObservableObject {
     }
 
     public func onEdited(isCancelled: Bool = false) -> Bool {
-        var result = false
-        if !isCancelled {
-           result = original.update(from: model)
+        if isCancelled {
+            isEditing = false
+            model = original.data
+            return true
         }
-
-        if result {
+        
+        if original.update(from: model) {
             isEditing = false
 
             return true

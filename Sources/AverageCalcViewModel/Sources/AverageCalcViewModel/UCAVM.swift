@@ -15,10 +15,21 @@ public class UCAVM: ObservableObject {
     public init(withBlock blocks: [Block]) {
         self.blocks = blocks
     }
+    
+    public func checkBlockNameAvailability(of data: Block.Data) -> Bool {
+        var result = true
+        blocks.forEach { block in
+            if block.name == data.name && block.id != data.id {
+                result = false
+            }
+        }
 
-    public func checkUENameAvailability(name: String) -> Bool {
-        let totalIndex = blocks.firstIndex(where: { $0.name == "Total" })
-        return !blocks[totalIndex!].ues.contains(where: { $0.name == name })
+        return result
+    }
+
+    public func checkUENameAvailability(of data: UE.Data) -> Bool {
+        let totalIndex = blocks.firstIndex(where: { $0.name == "Total" })!
+        return !blocks[totalIndex].ues.contains(where: { $0.name == data.name && $0.id != data.id })
     }
 
     public func removeBlock(with blockVM: BlockVM) {
