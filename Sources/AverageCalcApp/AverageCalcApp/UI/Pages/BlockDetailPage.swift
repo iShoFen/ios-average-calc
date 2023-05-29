@@ -14,10 +14,11 @@ struct BlockDetailPage: View {
     @ObservedObject var ucaVM: UCAVM
 
     @State private var blockError = false
+    @State private var ueError = false
     
     var body: some View {
         ScrollView {
-            let blockVM2 = BlockVM(fromBlock: ucaVM.blocks.first(where: { $0.id == blockVM.original.id })!)
+            let blockVM2 = BlockVM(fromBlock: ucaVM.blocks.first(where: { $0.id == blockVM.original.id }) ?? blockVM.original)
             VStack(alignment: .leading, spacing: 32) {
                 BlockItemView(blockVM: blockVM2)
                     .font(.title3)
@@ -45,20 +46,33 @@ struct BlockDetailPage: View {
             _ = blockVM.onEdited(isCancelled: true)
         }) {
             NavigationStack {
-                Text("Block edition")
+                BlockEditView(blockData: $blockVM.model, ucaVM: ucaVM)
                     .toolbar {
                         ToolbarItem(placement: .confirmationAction) {
                             Button("Done") {
                                 blockError = !ucaVM.checkBlockNameAvailability(of: blockVM.model)
                                 
                                 if !blockError {
-                                    _ = blockVM.onEdited()
-                                    _ = ucaVM.update(with: blockVM)
+                                    
+                                    blockVM.model.ues.forEach { ue in
+                                        ueError = !ucaVM.checkUENameAvailability(of: ue)
+                                        if ueError {
+                                            return
+                                        }
+                                    }
+                                    
+                                    if !ueError {
+                                        _ = blockVM.onEdited()
+                                        _ = ucaVM.update(with: blockVM)
+                                    }
                                 }
                             }
                             .alert("Le nom du Block est déjà utilisé par une autre. Veuillez le modifier afin de pouvoir sauvegarder les changements !", isPresented: $blockError) {
-                                        Button("OK", role: .cancel) {}
-                                    }
+                                Button("OK", role: .cancel) {}
+                            }
+                            .alert("Le nom d'une de vos UEs est déjà utilisé par une autre. Veuillez le modifier afin de pouvoir sauvegarder les changements !", isPresented: $ueError) {
+                                Button("OK", role: .cancel) {}
+                            }
                         }
 
                         ToolbarItem(placement: .cancellationAction) {
