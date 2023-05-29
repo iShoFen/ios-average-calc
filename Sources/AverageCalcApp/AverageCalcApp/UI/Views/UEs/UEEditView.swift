@@ -13,7 +13,7 @@ struct UEEditView: View {
     @Binding var ueData: UE.Data
     
     var body: some View {
-        VStack(alignment: .leading) {
+        ScrollView(alignment: .leading) {
             Text("Information de l'UE")
                 .font(.title)
                 .frame(maxWidth: .infinity, alignment: .center)
