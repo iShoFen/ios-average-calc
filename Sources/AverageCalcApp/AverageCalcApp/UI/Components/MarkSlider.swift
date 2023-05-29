@@ -16,7 +16,7 @@ struct MarkSlider: View {
     var body: some View {
         GeometryReader { geometry in
             HStack {
-                let dragGesture = DragGesture()
+                let dragGesture = DragGesture(minimumDistance: 0)
                     .onChanged { gesture in
                         if isEditable { updateValue(gesture, geometry) }
                     }
