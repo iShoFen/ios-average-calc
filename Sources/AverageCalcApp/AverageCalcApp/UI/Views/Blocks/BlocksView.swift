@@ -26,7 +26,14 @@ struct BlocksView: View {
             Text("Vous devez avoir la moyenne à chaque de ces blocs pour avoir votre diplôme.")
             
             ForEach(ucaVM.blocks) { block in
-                BlockItemView(blockVM: BlockVM(fromBlock: block))
+                HStack {
+                    BlockItemView(blockVM: BlockVM(fromBlock: block))
+                        .padding(.vertical, 8)
+                    
+                    NavigationLink(destination: Text(block.name)) {
+                        Image(systemName: "square.and.pencil")
+                    }
+                }
             }
         }
         .padding(32)
