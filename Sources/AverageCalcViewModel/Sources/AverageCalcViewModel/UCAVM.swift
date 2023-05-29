@@ -32,12 +32,16 @@ public class UCAVM: ObservableObject {
         return !blocks[totalIndex].ues.contains(where: { $0.name == data.name && $0.id != data.id })
     }
 
-    public func removeBlock(with blockVM: BlockVM) {
-        if let index = blocks.firstIndex(where: { $0.id == blockVM.original.id }) {
+    public func remove(block: Block) -> Bool {
+        if let index = blocks.firstIndex(where: { $0.id == block.id }) {
             if blocks[index].name != "Total" {
                 blocks.remove(at: index)
+                
+                return true
             }
         }
+        
+        return false
     }
 
     public func updateUE (with ue: UEVM) -> Bool {

@@ -38,6 +38,19 @@ struct BlocksView: View {
             
             ForEach(ucaVM.blocks) { block in
                 HStack {
+                    if block.name == "Total" {
+                        Image(systemName: "minus")
+                            .foregroundColor(CalcColors.lightGrey)
+                    } else {
+                        Button {
+                            withAnimation(.easeInOut(duration: 0.5)) {
+                                _ = ucaVM.remove(block: block)
+                            }
+                        } label: {
+                            Image(systemName: "minus")
+                        }
+                    }
+                    
                     BlockItemView(blockVM: BlockVM(fromBlock: block))
                         .padding(.vertical, 8)
                     
