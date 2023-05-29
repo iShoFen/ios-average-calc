@@ -20,7 +20,7 @@ struct UEsView: View {
 
             let totalIndex = ucaVM.blocks.firstIndex(where: { $0.name == "Total" })!
             ForEach(ucaVM.blocks[totalIndex].ues) { ue in
-                HStack(spacing: 8) {
+                HStack {
                     UEItemView(ueData: ue.data)
                     NavigationLink(destination: UEDetailPage(ueVM: UEVM(fromUE: ue), ucaVM: ucaVM)) {
                         Image(systemName: "square.and.pencil")
@@ -30,9 +30,7 @@ struct UEsView: View {
             }
         }
         .padding(32)
-        .background(CalcColors.lightGray)
-        .cornerRadius(8)
-        .padding(8)
+
     }
 }
 

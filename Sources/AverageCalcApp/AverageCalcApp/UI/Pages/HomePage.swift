@@ -18,6 +18,9 @@ struct HomePage: View {
                 BlocksView(ucaVM: ucaVM)
                 Divider()
                 UEsView(ucaVM: ucaVM)
+                    .background(CalcColors.lightGray)
+                    .cornerRadius(8)
+                    .padding(8)
             }
             .navigationTitle("Calculette")
         }
