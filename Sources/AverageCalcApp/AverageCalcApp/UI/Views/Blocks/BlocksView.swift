@@ -30,7 +30,7 @@ struct BlocksView: View {
                     BlockItemView(blockVM: BlockVM(fromBlock: block))
                         .padding(.vertical, 8)
                     
-                    NavigationLink(destination: BlockDetailView(blockVM: BlockVM(fromBlock: block), ucaVM: ucaVM)) {
+                    NavigationLink(destination: BlockDetailPage(blockVM: BlockVM(fromBlock: block), ucaVM: ucaVM)) {
                         Image(systemName: "square.and.pencil")
                     }
                 }

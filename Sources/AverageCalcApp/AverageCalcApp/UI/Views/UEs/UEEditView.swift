@@ -46,6 +46,8 @@ struct UEEditView: View {
             .frame(maxWidth: .infinity, alignment: .center)
             
             CoursesEditView(ueData: $ueData)
+            
+            Spacer()
         }
         .padding(8)
     }

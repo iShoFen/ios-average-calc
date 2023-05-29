@@ -9,7 +9,7 @@ import SwiftUI
 import AverageCalcStub
 import AverageCalcViewModel
 
-struct BlockDetailView: View {
+struct BlockDetailPage: View {
     @ObservedObject var blockVM: BlockVM
     @ObservedObject var ucaVM: UCAVM
 
@@ -73,12 +73,12 @@ struct BlockDetailView: View {
     }
 }
 
-struct BlockDetailView_Previews: PreviewProvider {
+struct BlockDetailPage_Previews: PreviewProvider {
     static var previews: some View {
         let ucaVM = UCAVM(withBlock: loadAllBlocks())
         let blockVM = BlockVM(fromBlock: ucaVM.blocks[0])
         NavigationStack {
-            BlockDetailView(blockVM: blockVM, ucaVM: ucaVM)
+            BlockDetailPage(blockVM: blockVM, ucaVM: ucaVM)
         }
     }
 }
