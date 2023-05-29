@@ -57,7 +57,6 @@ struct BlockEditView: View {
             .frame(maxWidth: .infinity, alignment: .center)
             
             UEsEditView(blockData: $blockData)
-            
         }
         .padding(8)
     }

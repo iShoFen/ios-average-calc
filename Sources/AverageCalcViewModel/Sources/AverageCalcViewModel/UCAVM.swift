@@ -44,11 +44,10 @@ public class UCAVM: ObservableObject {
         var tmpBlocks = blocks
         for i in 0..<tmpBlocks.count {
             var tmpUes = tmpBlocks[i].ues
-            for j in 0..<tmpUes.count {
-                if tmpUes[j].id == ue.original.id {
-                    tmpUes[j] = ue.original
-                }
+            if let index = tmpUes.firstIndex(where: { $0.id == ue.original.id }) {
+                tmpUes[index] = ue.original
             }
+
             if !tmpBlocks[i].updateUEs(from: tmpUes) {
                 return false
             }
@@ -59,66 +58,39 @@ public class UCAVM: ObservableObject {
     }
 
     public func update(with block: BlockVM) -> Bool {
-        if let index = blocks.firstIndex(where: { $0.id == block.original.id }) {
-            if blocks[index].name != "Total" {
-                if !updateTotalIfOthers(block.original) {
-                    return false
-                }
-                blocks[index] = block.original
-            } else if !updateOthersIfTotal(block.original) {
-                return false
-            }
-        } else {
-            if !updateTotalIfOthers(block.original) {
-                return false
-            }
-            blocks.append(block.original)
-        }
-        
-        return true
-    }
-
-    private func updateTotalIfOthers(_ block: Block) -> Bool {
-        let totalIndex = blocks.firstIndex(where: { $0.name == "Total" })!
-        var tmpTotal = blocks[totalIndex]
-        var tmpUes = tmpTotal.ues
-
-        for i in 0..<block.ues.count {
-            if let index = tmpUes.firstIndex(where: { $0.id == block.ues[i].id }) {
-                tmpUes[index] = block.ues[i]
-                continue
-            }
-
-            tmpUes.append(block.ues[i])
-        }
-
-        if !tmpTotal.updateUEs(from: tmpUes)  {
+        if !updateOthersOthersBlocks(block.original) {
             return false
         }
 
-        blocks[totalIndex] = tmpTotal
+        if !blocks.contains(where: { $0.id == block.original.id }) {
+            blocks.append(block.original)
+        }
 
         return true
     }
-    
-    private func updateOthersIfTotal(_ block: Block) -> Bool {
+
+    private func updateOthersOthersBlocks(_ block: Block) -> Bool {
         var tmpBlocks = blocks
-        for i in 0..<tmpBlocks.count {
-            if tmpBlocks[i].id == block.id {
-                tmpBlocks[i] = block
+        let isBlockTotal = block.name == "Total"
+
+        for (index, tmpBlock) in tmpBlocks.enumerated() {
+            if (tmpBlock == block) {
+                tmpBlocks[index] = block
                 continue
             }
-            
-            var tmpUes = blocks[i].ues
-            for j in 0..<blocks[i].ues.count {
-                if let index = block.ues.firstIndex(where: { $0.id == tmpUes[j].id }) {
-                    tmpUes[j] = block.ues[index]
-                    continue
-                }
-                tmpUes.remove(at: j)
+
+            var tmpUes = tmpBlock.ues
+            if isBlockTotal {
+                tmpUes.removeAll { ue in !block.ues.contains { $0.id == ue.id }  }
             }
 
-            if !tmpBlocks[i].updateUEs(from: tmpUes) {
+            update(UEs: &tmpUes, fromBlock: tmpBlock)
+
+            if (tmpBlock.name == "Total") {
+                tmpUes.append(contentsOf: block.ues.filter({ ue in !tmpBlock.ues.contains(where: { $0.id == ue.id }) }))
+            }
+
+            if !tmpBlocks[index].updateUEs(from: tmpUes) {
                 return false
             }
         }
@@ -126,5 +98,13 @@ public class UCAVM: ObservableObject {
         blocks = tmpBlocks
 
         return true
+    }
+
+    private func update(UEs ues: inout [UE], fromBlock block: Block) {
+        for ue in block.ues {
+            if let index = ues.firstIndex(where: { $0.id == ue.id }) {
+                ues[index] = ue
+            }
+        }
     }
 }
