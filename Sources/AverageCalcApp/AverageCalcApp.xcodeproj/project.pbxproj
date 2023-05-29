@@ -18,6 +18,9 @@
 		EC03A84D2A22522100B1F488 /* UEItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03A84C2A22522100B1F488 /* UEItemView.swift */; };
 		EC03A84F2A22522700B1F488 /* UEsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03A84E2A22522700B1F488 /* UEsView.swift */; };
 		EC03A8512A22523200B1F488 /* MarkSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03A8502A22523200B1F488 /* MarkSlider.swift */; };
+		EC2EC20E2A22DEC8008C6321 /* UEEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EC20D2A22DEC8008C6321 /* UEEditView.swift */; };
+		EC2EC2102A22E57B008C6321 /* CoursesEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EC20F2A22E57B008C6321 /* CoursesEditView.swift */; };
+		EC2EC2122A22E58D008C6321 /* CourseEditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2EC2112A22E58D008C6321 /* CourseEditItemView.swift */; };
 		EC6E4EFF2A224E5E005451F4 /* AverageCalcApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6E4EFE2A224E5E005451F4 /* AverageCalcApp.swift */; };
 		EC6E4F032A224E5E005451F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC6E4F022A224E5E005451F4 /* Assets.xcassets */; };
 		EC6E4F062A224E5E005451F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC6E4F052A224E5E005451F4 /* Preview Assets.xcassets */; };
@@ -56,6 +59,9 @@
 		EC03A84C2A22522100B1F488 /* UEItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UEItemView.swift; sourceTree = "<group>"; };
 		EC03A84E2A22522700B1F488 /* UEsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UEsView.swift; sourceTree = "<group>"; };
 		EC03A8502A22523200B1F488 /* MarkSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkSlider.swift; sourceTree = "<group>"; };
+		EC2EC20D2A22DEC8008C6321 /* UEEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UEEditView.swift; sourceTree = "<group>"; };
+		EC2EC20F2A22E57B008C6321 /* CoursesEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesEditView.swift; sourceTree = "<group>"; };
+		EC2EC2112A22E58D008C6321 /* CourseEditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseEditItemView.swift; sourceTree = "<group>"; };
 		EC6E4EFB2A224E5E005451F4 /* AverageCalcApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AverageCalcApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC6E4EFE2A224E5E005451F4 /* AverageCalcApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageCalcApp.swift; sourceTree = "<group>"; };
 		EC6E4F022A224E5E005451F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -157,6 +163,7 @@
 			children = (
 				EC03A84C2A22522100B1F488 /* UEItemView.swift */,
 				EC03A84E2A22522700B1F488 /* UEsView.swift */,
+				EC2EC20D2A22DEC8008C6321 /* UEEditView.swift */,
 			);
 			path = UEs;
 			sourceTree = "<group>";
@@ -240,6 +247,8 @@
 			children = (
 				ECD42FBB2A227ADE00E04427 /* CoursesView.swift */,
 				ECD42FBD2A227AEF00E04427 /* CourseItemView.swift */,
+				EC2EC20F2A22E57B008C6321 /* CoursesEditView.swift */,
+				EC2EC2112A22E58D008C6321 /* CourseEditItemView.swift */,
 			);
 			path = Courses;
 			sourceTree = "<group>";
@@ -386,11 +395,14 @@
 				EC03A84B2A22521600B1F488 /* BlocksView.swift in Sources */,
 				EC03A8412A22506700B1F488 /* Double.swift in Sources */,
 				EC03A8432A22509000B1F488 /* Colors.swift in Sources */,
+				EC2EC2122A22E58D008C6321 /* CourseEditItemView.swift in Sources */,
 				EC6E4EFF2A224E5E005451F4 /* AverageCalcApp.swift in Sources */,
 				EC03A8472A22520500B1F488 /* HomePage.swift in Sources */,
+				EC2EC2102A22E57B008C6321 /* CoursesEditView.swift in Sources */,
 				ECD42FBC2A227ADE00E04427 /* CoursesView.swift in Sources */,
 				EC03A84D2A22522100B1F488 /* UEItemView.swift in Sources */,
 				EC03A8492A22520D00B1F488 /* BlockItemView.swift in Sources */,
+				EC2EC20E2A22DEC8008C6321 /* UEEditView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
