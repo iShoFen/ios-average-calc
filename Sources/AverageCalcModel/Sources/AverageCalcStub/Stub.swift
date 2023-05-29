@@ -42,7 +42,7 @@ private var ue5: UE = UE(name: "UE5 Technologies Mobiles 2", coefficient: 9, cou
     Course(name: "iOS", mark: 0, coefficient: 5),
     Course(name: "Multiplateformes", mark: 0, coefficient: 3),
     Course(name: "QT Quick", mark: 0, coefficient: 5),
-    Course(name: "Xamarin", mark: 0, coefficient: 5)
+    Course(name: "MAUI", mark: 0, coefficient: 5)
 ])
 
 private var ue6: UE = UE(name: "UE6 Projet", coefficient: 9, courses: [
@@ -58,8 +58,4 @@ public func loadAllBlocks() -> [Block] {
        Block(name: "Total", ues: [ue1, ue2, ue3, ue4, ue5, ue6, ue7]),
        Block(name: "Projet/Stage", ues: [ue6, ue7])
     ]
-}
-
-public func loadAllUEs() -> [UE] {
-    [ue1, ue2, ue3, ue4, ue5, ue6, ue7]
 }

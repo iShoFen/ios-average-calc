@@ -11,12 +11,11 @@ import AverageCalcViewModel
 
 @main
 struct UCAverageApp: App {
-    @StateObject var uesVM = UEsVM(withUEs: loadAllUEs())
-    @StateObject var blocksVM = BlocksVM(withBlock: loadAllBlocks())
+    @StateObject var ucaVM = UCAVM(withBlock: loadAllBlocks())
     
     var body: some Scene {
         WindowGroup {
-            HomePage(blocksVM: blocksVM, uesVM: uesVM)
+            HomePage(ucaVM: ucaVM)
         }
     }
 }
