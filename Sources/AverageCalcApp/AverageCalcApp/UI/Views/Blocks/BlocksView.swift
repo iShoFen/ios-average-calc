@@ -37,7 +37,7 @@ struct BlocksView: View {
             }
         }
         .padding(32)
-        .background(CalcColors.lightGray)
+        .background(CalcColors.lightGrey)
         .cornerRadius(8)
         .padding(8)
     }

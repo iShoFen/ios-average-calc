@@ -18,7 +18,7 @@ struct HomePage: View {
                 BlocksView(ucaVM: ucaVM)
                 Divider()
                 UEsView(ucaVM: ucaVM)
-                    .background(CalcColors.lightGray)
+                    .background(CalcColors.lightGrey)
                     .cornerRadius(8)
                     .padding(8)
             }

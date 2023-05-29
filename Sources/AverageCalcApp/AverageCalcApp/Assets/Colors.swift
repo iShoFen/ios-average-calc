@@ -9,5 +9,5 @@ import Foundation
 import SwiftUI
 
 public struct CalcColors {
-    static let lightGray = Color("lightGrey")
+    static let lightGrey = Color("lightGrey")
 }
