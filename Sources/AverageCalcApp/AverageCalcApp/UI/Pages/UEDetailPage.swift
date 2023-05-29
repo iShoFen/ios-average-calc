@@ -57,10 +57,10 @@ struct UEDetailPage: View {
                                     coursesError = !ueVM.onEdited()
                                 }
                             }
-                            .alert("Au moins un de vos cours possède le 2 fois le même nom. Veuillez les modifier afin de pouvoir sauvegarder les changements", isPresented: $coursesError) {
+                            .alert("Au moins un de vos cours possède le 2 fois le même nom. Veuillez les modifier afin de pouvoir sauvegarder les changements !", isPresented: $coursesError) {
                                 Button("OK", role: .cancel) {}
                             }
-                            .alert("Le nom de l'UE est déjà utilisé par une autre? Veuillez le modifier afin de pouvoir sauvegarder les changements", isPresented: $ueError) {
+                            .alert("Le nom de l'UE est déjà utilisé par une autre. Veuillez le modifier afin de pouvoir sauvegarder les changements !", isPresented: $ueError) {
                                 Button("OK", role: .cancel) {}
                             }
                         }
