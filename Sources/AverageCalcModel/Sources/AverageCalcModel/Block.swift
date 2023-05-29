@@ -38,7 +38,7 @@ public struct Block: Identifiable {
                 coefficient += ue.coefficient
             }
             
-            return average / coefficient
+            return coefficient == 0 ? 0 : average / coefficient
         }
     }
     
@@ -47,13 +47,9 @@ public struct Block: Identifiable {
         _name = name
         self.ues = ues
     }
-    
-    public func canAddUE(_ ue: UE) -> Bool {
-        !ues.contains(where: { $0.name == ue.name })
-    }
-    
+
     public mutating func addUE(_ ue: UE) -> Bool {
-        guard canAddUE(ue) else {
+        guard !ues.contains(where: { $0.id == ue.id && $0.name == ue.name }) else {
             return false
         }
         ues.append(ue)
@@ -61,16 +57,12 @@ public struct Block: Identifiable {
         return true
     }
 
-    public func canRemoveUE(_ ue: UE) -> Bool {
-        ues.contains(where: { $0.name == ue.name })
-    }
-
     public mutating func removeUE(_ ue: UE) -> Bool {
-        guard canRemoveUE(ue) else {
+        guard ues.contains(where: { $0 == ue}) else {
             return false
         }
         
-        ues.remove(at: ues.firstIndex(where: { $0.name == ue.name })!)
+        ues.remove(at: ues.firstIndex(where: { $0 == ue })!)
         
         return true
     }

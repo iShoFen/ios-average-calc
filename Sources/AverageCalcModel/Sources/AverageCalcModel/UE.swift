@@ -51,7 +51,7 @@ public struct UE: Identifiable {
                 coefficient += course.coefficient
             }
 
-            return average / coefficient
+            return coefficient == 0 ? 0 : average / coefficient
         }
     }
 
@@ -62,12 +62,8 @@ public struct UE: Identifiable {
         self.courses = courses
     }
 
-    public func canAddCourse(_ course: Course) -> Bool {
-        !courses.contains(where: { $0.name == course.name })
-    }
-
     public mutating func addCourse(_ course: Course) -> Bool {
-        guard canAddCourse(course) else {
+        guard !courses.contains(where: { $0 == course && $0.name == course.name }) else {
             return false
         }
 
@@ -76,14 +72,19 @@ public struct UE: Identifiable {
         return true
     }
 
-    public func canRemoveCourse(_ course: Course) -> Bool {
-        courses.contains(where: { $0 == course })
+    public mutating func removeCourse(_ course: Course) -> Bool {
+        guard courses.contains(where: { $0 == course }) else {
+            return false
+        }
+
+        courses.remove(at: courses.firstIndex(where: { $0 == course })!)
+
+        return true
     }
 
     public mutating func updateCourses(from courses: [Course]) -> Bool {
         let ids = courses.map { $0.id }
         let names = courses.map { $0.name }
-
 
         guard Set(ids).count == ids.count && Set(names).count == names.count else {
             return false
