@@ -15,10 +15,6 @@ struct UEsView: View {
     
     var body: some View {
         LazyVStack(alignment: .leading) {
-            Label("UEs", systemImage: "doc.fill")
-                .font(.title)
-            Text("Détail des UEs")
-
             ForEach(blockVM.original.ues) { ue in
                 HStack {
                     UEItemView(ueData: ue.data)
@@ -29,7 +25,8 @@ struct UEsView: View {
                 }
             }
         }
-        .padding(32)
+        .padding(.horizontal, 32)
+        .padding(.bottom, 32)
 
     }
 }
