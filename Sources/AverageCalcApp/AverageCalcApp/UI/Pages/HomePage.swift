@@ -17,7 +17,9 @@ struct HomePage: View {
             ScrollView {
                 BlocksView(ucaVM: ucaVM)
                 Divider()
-                UEsView(ucaVM: ucaVM)
+
+                let totalIndex = ucaVM.blocks.firstIndex(where: { $0.name == "Total" })!
+                UEsView(blockVM: BlockVM(fromBlock: ucaVM.blocks[totalIndex]), ucaVM: ucaVM)
                     .background(CalcColors.lightGrey)
                     .cornerRadius(8)
                     .padding(8)

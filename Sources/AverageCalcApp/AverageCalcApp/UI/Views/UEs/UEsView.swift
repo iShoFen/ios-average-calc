@@ -10,6 +10,7 @@ import AverageCalcStub
 import AverageCalcViewModel
 
 struct UEsView: View {
+    @ObservedObject var blockVM: BlockVM
     @ObservedObject var ucaVM: UCAVM
     
     var body: some View {
@@ -18,8 +19,7 @@ struct UEsView: View {
                 .font(.title)
             Text("Détail des UEs")
 
-            let totalIndex = ucaVM.blocks.firstIndex(where: { $0.name == "Total" })!
-            ForEach(ucaVM.blocks[totalIndex].ues) { ue in
+            ForEach(blockVM.original.ues) { ue in
                 HStack {
                     UEItemView(ueData: ue.data)
                     NavigationLink(destination: UEDetailPage(ueVM: UEVM(fromUE: ue), ucaVM: ucaVM)) {
@@ -37,6 +37,7 @@ struct UEsView: View {
 struct UEsView_Previews: PreviewProvider {
     static var previews: some View {
         let ucaVM = UCAVM(withBlock: loadAllBlocks())
-        UEsView(ucaVM: ucaVM)
+        let blockVM = BlockVM(fromBlock: ucaVM.blocks[0])
+        UEsView(blockVM: blockVM, ucaVM: ucaVM)
     }
 }
