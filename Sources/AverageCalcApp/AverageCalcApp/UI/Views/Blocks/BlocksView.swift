@@ -7,20 +7,31 @@
 
 import SwiftUI
 import AverageCalcStub
+import AverageCalcModel
 import AverageCalcViewModel
 
 struct BlocksView: View {
     @ObservedObject var ucaVM: UCAVM
+    
+    @State private var newBlockVM = BlockVM(fromBlock: Block(name: "Nouveau Bloc", ues: []))
+    
+    @State private var isNewBlock = false
+    @State private var isBlockError = false
+    @State private var isUEError = false
+    
     var body: some View {
         LazyVStack(alignment: .leading) {
             HStack {
                 Label("Blocs", systemImage: "doc.on.doc.fill")
                     .font(.title)
                 
-                NavigationLink(destination: Text("Nouveau Block"))
-                {
+                Button {
+                    isNewBlock = true
+                    newBlockVM.onEditing()
+                } label: {
                     Image(systemName: "plus")
                 }
+                
             }
             
             Text("Vous devez avoir la moyenne à chaque de ces blocs pour avoir votre diplôme.")
@@ -40,6 +51,57 @@ struct BlocksView: View {
         .background(CalcColors.lightGrey)
         .cornerRadius(8)
         .padding(8)
+        .sheet (isPresented: $isNewBlock, onDismiss: {
+            isNewBlock = false
+            createNewBlock(&newBlockVM)
+        }) {
+            NavigationStack {
+            
+                BlockEditView(blockData: $newBlockVM.model, ucaVM: ucaVM)
+                    .toolbar {
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Done") {
+                                isBlockError = !ucaVM.checkBlockNameAvailability(of: newBlockVM.model)
+                                
+                                if !isBlockError {
+                                    
+                                    newBlockVM.model.ues.forEach { ue in
+                                        isUEError = !ucaVM.checkUENameAvailability(of: ue)
+                                        if isUEError {
+                                            return
+                                        }
+                                    }
+                                    
+                                    if !isUEError {
+                                        _ = newBlockVM.onEdited()
+                                        _ = ucaVM.update(with: newBlockVM)
+                                        isNewBlock = false
+                                        createNewBlock(&newBlockVM)
+                                    }
+                                }
+                            }
+                            .alert("Le nom du Block est déjà utilisé par une autre. Veuillez le modifier afin de pouvoir sauvegarder les changements !", isPresented: $isBlockError) {
+                                Button("OK", role: .cancel) {}
+                            }
+                            .alert("Le nom d'une de vos UEs est déjà utilisé par une autre. Veuillez le modifier afin de pouvoir sauvegarder les changements !", isPresented: $isUEError) {
+                                Button("OK", role: .cancel) {}
+                            }
+                        }
+
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") {
+                                _ = newBlockVM.onEdited(isCancelled: true)
+                                isNewBlock = false
+                                createNewBlock(&newBlockVM)
+                            }
+                        }
+                    }
+            }
+        }
+    }
+    
+    private func createNewBlock( _ block: inout BlockVM) {
+        block = BlockVM(fromBlock: Block(name: "Nouveau Bloc", ues: []))
     }
 }
 
