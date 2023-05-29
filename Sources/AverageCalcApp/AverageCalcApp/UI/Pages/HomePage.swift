@@ -10,16 +10,14 @@ import AverageCalcViewModel
 import AverageCalcStub
 
 struct HomePage: View {
-    @ObservedObject var blocksVM: BlocksVM
-    @ObservedObject var uesVM: UEsVM
-    
+    @ObservedObject var ucaVM: UCAVM
+
     var body: some View {
         NavigationStack {
-                ScrollView {
-                    BlocksView(blocksVM: blocksVM)
-                    Divider()
-                    UEsView(uesVM: uesVM)
-                    
+            ScrollView {
+                BlocksView(ucaVM: ucaVM)
+                Divider()
+                UEsView(ucaVM: ucaVM)
             }
             .navigationTitle("Calculette")
         }
@@ -28,8 +26,7 @@ struct HomePage: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let blocksVM = BlocksVM(withBlock: loadAllBlocks())
-        let uesVM = UEsVM(withUEs: loadAllUEs())
-        HomePage(blocksVM: blocksVM, uesVM: uesVM)
+        let ucaVM = UCAVM(withBlock: loadAllBlocks())
+        HomePage(ucaVM: ucaVM)
     }
 }

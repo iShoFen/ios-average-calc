@@ -10,14 +10,22 @@ import AverageCalcStub
 import AverageCalcViewModel
 
 struct BlocksView: View {
-    public var blocksVM: BlocksVM
+    @ObservedObject var ucaVM: UCAVM
     var body: some View {
         LazyVStack(alignment: .leading) {
-            Label("Blocs", systemImage: "doc.on.doc.fill")
-                .font(.title)
+            HStack {
+                Label("Blocs", systemImage: "doc.on.doc.fill")
+                    .font(.title)
+                
+                NavigationLink(destination: Text("Nouveau Block"))
+                {
+                    Image(systemName: "plus")
+                }
+            }
+            
             Text("Vous devez avoir la moyenne à chaque de ces blocs pour avoir votre diplôme.")
             
-            ForEach(blocksVM.blocks) { block in
+            ForEach(ucaVM.blocks) { block in
                 BlockItemView(blockVM: BlockVM(fromBlock: block))
             }
         }
@@ -30,7 +38,9 @@ struct BlocksView: View {
 
 struct BlocksView_Previews: PreviewProvider {
     static var previews: some View {
-        let blocks = BlocksVM(withBlock: loadAllBlocks())
-        BlocksView(blocksVM: blocks)
+        let ucaVM = UCAVM(withBlock: loadAllBlocks())
+        NavigationStack {
+            BlocksView(ucaVM: ucaVM)
+        }
     }
 }

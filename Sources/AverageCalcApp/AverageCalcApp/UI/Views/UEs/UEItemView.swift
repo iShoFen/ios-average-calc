@@ -7,20 +7,20 @@
 
 import SwiftUI
 import AverageCalcStub
-import AverageCalcViewModel
+import AverageCalcModel
 
 struct UEItemView: View {
-    @ObservedObject public var ueVM: UEVM
+    public var ueData: UE.Data
     
     var body: some View {
         VStack {
             HStack {
-                Text(ueVM.model.name).padding(.leading, 10)
+                Text(ueData.name).padding(.leading, 10)
                 Spacer()
-                Text(String(ueVM.model.coefficient)).padding(.trailing, 10)
+                Text(String(ueData.coefficient)).padding(.trailing, 10)
             }
             
-            MarkSlider(value: $ueVM.model.average, isEditable: .constant(false), minValue: 0, maxValue: 20)
+            MarkSlider(value: .constant(ueData.average), isEditable: .constant(false), minValue: 0, maxValue: 20)
                 .padding(.trailing, 60)
             
             Divider()
@@ -30,7 +30,7 @@ struct UEItemView: View {
 
 struct UEItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let ueVM = UEVM(fromUE: loadAllUEs().first!)
-        UEItemView(ueVM: ueVM)
+        let ueData = loadAllBlocks()[0].ues[0].data
+        UEItemView(ueData: ueData)
     }
 }
