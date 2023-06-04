@@ -14,8 +14,8 @@ struct CoursesView: View {
     
     var body: some View {
         LazyVStack(alignment: .leading) {
-            ForEach(ueVM.original.courses) { course in
-                CourseItemView(courseVM: CourseVM(fromCourse: course), ueVM: ueVM)
+            ForEach(ueVM.courses) { courseVM in
+                CourseItemView(courseVM: courseVM)
             }
         }
     }
@@ -23,7 +23,7 @@ struct CoursesView: View {
 
 struct CoursesView_Previews: PreviewProvider {
     static var previews: some View {
-        let ueVM = UEVM(fromUE: loadAllBlocks()[0].ues[0])
-        CoursesView(ueVM: ueVM)
+        let ucaVM = UCAVM(from: loadAllBlocks())
+        CoursesView(ueVM: ucaVM.blocks[0].ues[0])
     }
 }

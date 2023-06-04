@@ -7,19 +7,19 @@
 
 import SwiftUI
 import AverageCalcStub
-import AverageCalcModel
+import AverageCalcViewModel
 
 struct UEsEditView: View {
-    @Binding var blockData: Block.Data
+    @ObservedObject var blockVM: BlockVM
     
     var body: some View {
         LazyVStack(alignment: .leading) {
-            ForEach($blockData.ues) { $ue in
+            ForEach(blockVM.ues) { ueVM in
                 HStack(spacing: 16) {
                     Button {
                         withAnimation(.easeInOut(duration: 0.5)) {
-                            if let index = blockData.ues.firstIndex(where: { $0.id == ue.id }) {
-                                blockData.ues.remove(at: index)
+                            if let index = blockVM.ues.firstIndex(where: { $0 == ueVM }) {
+                                blockVM.ues.remove(at: index)
                             }
                         }
                     }
@@ -27,7 +27,7 @@ struct UEsEditView: View {
                         Image(systemName: "minus")
                     }
 
-                    UEEditItemView(ueData: $ue)
+                    UEEditItemView(ueVM: ueVM)
                 }
             }
         }
@@ -37,7 +37,7 @@ struct UEsEditView: View {
 
 struct UEsEditView_Previews: PreviewProvider {
     static var previews: some View {
-        let blockData = loadAllBlocks()[0].data
-        UEsEditView(blockData: .constant(blockData))
+        let ucaVM = UCAVM(from: loadAllBlocks())
+        UEsEditView(blockVM: ucaVM.blocks[0])
     }
 }

@@ -7,23 +7,23 @@
 
 import SwiftUI
 import AverageCalcStub
-import AverageCalcModel
+import AverageCalcViewModel
 
 struct UEEditItemView: View {
-    @Binding var ueData: UE.Data
+    @ObservedObject var ueVM: UEVM
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Text("Nom de l'UE:")
                     .bold()
-                TextField("Entrez le nom de l'UE", text: $ueData.name)
+                TextField("Entrez le nom de l'UE", text: $ueVM.name)
             }
             
             HStack {
                 Text("Coefficient de l'UE:")
                     .bold()
-                TextField("Entrez le coefficient de l'UE", value: $ueData.coefficient, format: .number)
+                TextField("Entrez le coefficient de l'UE", value: $ueVM.coefficient, format: .number)
             }
             
             Divider()
@@ -34,7 +34,7 @@ struct UEEditItemView: View {
 
 struct UEEditItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let ueData = loadAllBlocks()[0].ues[0].data
-        UEEditItemView(ueData: .constant(ueData))
+        let ucaVM = UCAVM(from: loadAllBlocks())
+        UEEditItemView(ueVM: ucaVM.blocks[0].ues[0])
     }
 }

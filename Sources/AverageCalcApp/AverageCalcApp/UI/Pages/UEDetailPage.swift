@@ -11,17 +11,16 @@ import AverageCalcViewModel
 
 struct UEDetailPage: View {
     @ObservedObject var ueVM: UEVM
-    @ObservedObject var ucaVM : UCAVM
-    @State private var coursesError = false
-    @State private var ueError = false
+    @State private var isError = false
+    @State private var error = ""
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 32) {
-                UEItemView(ueData: ueVM.original.data)
+                UEItemView(ueVM: ueVM)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Label("coefficient : \(ueVM.original.coefficient.format(f: ".1"))", systemImage: "xmark.circle.fill")
+                    Label("coefficient : \(ueVM.coefficient.format(f: ".1"))", systemImage: "xmark.circle.fill")
                     Label("Détails des notes", systemImage: "note.text")
                 }
 
@@ -30,10 +29,7 @@ struct UEDetailPage: View {
         }
         .padding(.horizontal, 8)
         .padding(.vertical)
-        .navigationTitle(ueVM.original.name)
-        .onDisappear {
-            _ = ucaVM.updateUE(with: ueVM)
-        }
+        .navigationTitle(ueVM.name)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button {
@@ -44,30 +40,23 @@ struct UEDetailPage: View {
             }
         }
         .sheet(isPresented: $ueVM.isEditing, onDismiss: {
-            _ = ueVM.onEdited(isCancelled: true)
+            _ = ueVM.onEdited(isCanceled: true, error: &error)
         }) {
             NavigationStack {
-                UEEditView(ueData: $ueVM.model)
+                UEEditView(ueVM: ueVM.copy!)
                     .toolbar {
                         ToolbarItem(placement: .confirmationAction) {
                             Button("Done") {
-                                ueError = !ucaVM.checkUENameAvailability(of: ueVM.model)
-
-                                if !ueError {
-                                    coursesError = !ueVM.onEdited()
-                                }
+                                isError = !ueVM.onEdited(error: &error)
                             }
-                            .alert("Au moins un de vos cours possède le 2 fois le même nom. Veuillez les modifier afin de pouvoir sauvegarder les changements !", isPresented: $coursesError) {
-                                Button("OK", role: .cancel) {}
-                            }
-                            .alert("Le nom de l'UE est déjà utilisé par une autre. Veuillez le modifier afin de pouvoir sauvegarder les changements !", isPresented: $ueError) {
+                            .alert(error, isPresented: $isError) {
                                 Button("OK", role: .cancel) {}
                             }
                         }
                         
                         ToolbarItem(placement: .cancellationAction) {
                             Button("Cancel") {
-                                    _ = ueVM.onEdited(isCancelled: true)
+                                    _ = ueVM.onEdited(isCanceled: true, error: &error)
                                 
                             }
                         }
@@ -79,10 +68,9 @@ struct UEDetailPage: View {
 
 struct UEDetailPage_Previews: PreviewProvider {
     static var previews: some View {
-        let ucaVM = UCAVM(withBlock: loadAllBlocks())
-        let ueVM = UEVM(fromUE: ucaVM.blocks[0].ues[0])
+        let ucaVM = UCAVM(from: loadAllBlocks())
         NavigationStack {
-            UEDetailPage(ueVM: ueVM, ucaVM: ucaVM)
+            UEDetailPage(ueVM: ucaVM.blocks[0].ues[0])
         }
     }
 }

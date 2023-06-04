@@ -11,14 +11,13 @@ import AverageCalcViewModel
 
 struct UEsView: View {
     @ObservedObject var blockVM: BlockVM
-    @ObservedObject var ucaVM: UCAVM
     
     var body: some View {
         LazyVStack(alignment: .leading) {
-            ForEach(blockVM.original.ues) { ue in
+            ForEach(blockVM.ues) { ueVM in
                 HStack {
-                    UEItemView(ueData: ue.data)
-                    NavigationLink(destination: UEDetailPage(ueVM: UEVM(fromUE: ue), ucaVM: ucaVM)) {
+                    UEItemView(ueVM: ueVM)
+                    NavigationLink(destination: UEDetailPage(ueVM: ueVM)) {
                         Image(systemName: "square.and.pencil")
                     }
                     Divider()
@@ -33,8 +32,7 @@ struct UEsView: View {
 
 struct UEsView_Previews: PreviewProvider {
     static var previews: some View {
-        let ucaVM = UCAVM(withBlock: loadAllBlocks())
-        let blockVM = BlockVM(fromBlock: ucaVM.blocks[0])
-        UEsView(blockVM: blockVM, ucaVM: ucaVM)
+        let ucaVM = UCAVM(from: loadAllBlocks())
+        UEsView(blockVM: ucaVM.blocks[0])
     }
 }

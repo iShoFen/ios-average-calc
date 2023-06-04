@@ -29,7 +29,7 @@ struct HomePage: View {
                     .padding(.top, 32)
                 
                     let totalIndex = ucaVM.blocks.firstIndex(where: { $0.name == "Total" })!
-                    UEsView(blockVM: BlockVM(fromBlock: ucaVM.blocks[totalIndex]), ucaVM: ucaVM)
+                    UEsView(blockVM: ucaVM.blocks[totalIndex])
                 }
                 .background(CalcColors.lightGrey)
                 .cornerRadius(8)
@@ -42,7 +42,7 @@ struct HomePage: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let ucaVM = UCAVM(withBlock: loadAllBlocks())
+        let ucaVM = UCAVM(from: loadAllBlocks())
         HomePage(ucaVM: ucaVM)
     }
 }
