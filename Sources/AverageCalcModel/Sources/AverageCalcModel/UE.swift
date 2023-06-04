@@ -86,15 +86,41 @@ public struct UE: Identifiable, Equatable {
         return true
     }
 
-    public mutating func updateCourses(from courses: [Course]) -> Bool {
+    public func canUpdateCourses(from courses: [Course]) -> Bool {
         let ids = courses.map { $0.id }
         let names = courses.map { $0.name }
 
-        guard Set(ids).count == ids.count && Set(names).count == names.count else {
+        return Set(ids).count == ids.count && Set(names).count == names.count
+    }
+
+    public mutating func updateCourses(from courses: [Course]) -> Bool {
+        guard canUpdateCourses(from: courses) else {
             return false
         }
 
         self.courses = courses
+
+        return true
+    }
+
+    public func canUpdateCourse(from course: Course) -> Bool {
+        guard courses.contains(where: { $0 == course }) else {
+            return false
+        }
+
+        guard !courses.contains(where: { $0.name == course.name && $0 != course }) else {
+            return false
+        }
+
+        return true
+    }
+
+    public mutating func updateCourse(from course: Course) -> Bool {
+        guard canUpdateCourse(from: course) else {
+            return false
+        }
+
+        courses[courses.firstIndex(where: { $0 == course })!] = course
 
         return true
     }

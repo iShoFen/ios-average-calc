@@ -52,24 +52,19 @@ public struct UCA: Identifiable, Equatable {
         return false
     }
 
-    public mutating func updateUE (with ue: UE) -> Bool {
-        var tmpBlocks = blocks
-        for i in 0..<tmpBlocks.count {
-            var tmpUes = tmpBlocks[i].ues
-            if let index = tmpUes.firstIndex(where: { $0 == ue }) {
-                tmpUes[index] = ue
-            }
-
-            if !tmpBlocks[i].updateUEs(from: tmpUes) {
-                return false
-            }
+    public mutating func updateBlocks(with block: Block) -> Bool {
+        if !updateOtherBlocks(with: block) {
+            return false
         }
 
-        blocks = tmpBlocks
+        if !blocks.contains(where: { $0 == block }) {
+            blocks.append(block)
+        }
+
         return true
     }
 
-    public mutating func updateBlocks(with block: Block) -> Bool {
+    private mutating func updateOtherBlocks(with block: Block) -> Bool {
         var tmpBlocks = blocks
         let isBlockTotal = block.name == "Total"
 

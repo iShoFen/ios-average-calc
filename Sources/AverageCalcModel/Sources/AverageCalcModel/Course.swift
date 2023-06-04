@@ -59,6 +59,6 @@ public struct Course: Identifiable, Equatable {
     }
 
     public init(withName name: String, andMark mark: Double, andCoefficient coefficient: Double) {
-        self.init(with: UUID(), andName: name, andMark: mark, andCoefficient: coefficient)
+        self.init(withId: UUID(), andName: name, andMark: mark, andCoefficient: coefficient)
     }
 }

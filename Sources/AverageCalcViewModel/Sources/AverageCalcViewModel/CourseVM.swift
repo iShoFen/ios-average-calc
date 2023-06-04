@@ -20,7 +20,7 @@ public class CourseVM: BaseVM, Equatable {
     public var copy: CourseVM? = nil
 
     @Published
-    var model: Course = Course(withName: "Nouveau Cours", andMark: 0, andCoefficient: 1) {
+    var model: Course  {
         didSet {
             if model.name != name {
                 name = model.name
@@ -39,7 +39,7 @@ public class CourseVM: BaseVM, Equatable {
     }
 
     @Published
-    public var name: String = "" {
+    public var name: String {
         didSet {
             if model.name != name {
                 model.name = name
@@ -48,7 +48,7 @@ public class CourseVM: BaseVM, Equatable {
     }
 
     @Published
-    public var mark: Double = 0 {
+    public var mark: Double {
         didSet {
             if model.mark != mark {
                 model.mark = mark
@@ -57,7 +57,7 @@ public class CourseVM: BaseVM, Equatable {
     }
 
     @Published
-    public var coefficient: Double = 1 {
+    public var coefficient: Double {
         didSet {
             if model.coefficient != coefficient {
                 model.coefficient = coefficient
@@ -68,8 +68,20 @@ public class CourseVM: BaseVM, Equatable {
     public var id: UUID { model.id }
 
     public init(from model: Course) {
-        super.init()
         self.model = model
+        name = model.name
+        mark = model.mark
+        coefficient = model.coefficient
+        super.init()
+    }
+    
+    public override init() {
+        let model = Course(withName: "Nouveau Cours", andMark: 0, andCoefficient: 1)
+        self.model = model
+        name = model.name
+        mark = model.mark
+        coefficient = model.coefficient
+        super.init()
     }
 
     public func onEditing() {
@@ -77,10 +89,10 @@ public class CourseVM: BaseVM, Equatable {
         isEditing = true
     }
 
-    public func onEdited(isCancelled cancelled: Bool = false, error: inout String) -> Bool {
+    public func onEdited(isCanceled canceled: Bool = false, error: inout String) -> Bool {
         if !isEditing { return false }
 
-        if !cancelled && !update(error: &error) { return false }
+        if !canceled && !update(error: &error) { return false }
 
         copy = nil
         isEditing = false
