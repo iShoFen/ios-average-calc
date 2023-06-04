@@ -61,8 +61,8 @@ struct BlockSheetView: View {
 
 struct BlockSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        var ucaVM = UCAVM(withBlock: loadAllBlocks())
-        var blockVM = BlockVM(fromBlock: ucaVM.blocks[0])
+        let ucaVM = UCAVM(withBlock: loadAllBlocks())
+        let blockVM = BlockVM(fromBlock: ucaVM.blocks[0])
         BlockSheetView(blockVM: blockVM, ucaVM: ucaVM)
     }
 }

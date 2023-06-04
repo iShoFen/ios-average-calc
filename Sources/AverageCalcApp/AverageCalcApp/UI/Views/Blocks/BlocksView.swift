@@ -59,6 +59,7 @@ struct BlocksView: View {
                     }
                 }
             }
+
         }
         .padding(32)
         .background(CalcColors.lightGrey)

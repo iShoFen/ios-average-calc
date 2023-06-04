@@ -17,7 +17,6 @@ struct CoursesEditView: View {
             ForEach($ueData.courses) { $course in
                 HStack(spacing: 16) {
                     Button {
-                        // update with an animation
                         withAnimation(.easeInOut(duration: 0.5)) {
                             if let index = ueData.courses.firstIndex(where: { $0.id == course.id }) {
                                 ueData.courses.remove(at: index)
@@ -30,6 +29,9 @@ struct CoursesEditView: View {
 
                     CourseEditItemView(courseData: $course)
                 }
+            }
+            .onDelete { offset in
+                ueData.courses.remove(atOffsets: offset)
             }
         }
         .padding(8)

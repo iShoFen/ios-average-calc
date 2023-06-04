@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Block: Identifiable {
+public struct Block: Identifiable, Equatable {
     public static func == (lhs: Block, rhs: Block) -> Bool {
         lhs.id == rhs.id
     }
@@ -42,10 +42,14 @@ public struct Block: Identifiable {
         }
     }
     
-    public init(id: UUID = UUID(), name: String, ues: [UE]) {
+    public init(withId id: UUID, andName name: String, andUes ues: [UE] = []) {
         self.id = id
         _name = name
         self.ues = ues
+    }
+
+    public init(withName name: String, andUes ues: [UE] = []) {
+        self.init(withId: UUID(), andName: name, andUes: [])
     }
 
     public mutating func addUE(_ ue: UE) -> Bool {

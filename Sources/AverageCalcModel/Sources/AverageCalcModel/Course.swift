@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Course: Identifiable {
+public struct Course: Identifiable, Equatable {
     public static func == (lhs: Course, rhs: Course) -> Bool {
         lhs.id == rhs.id
     }
@@ -51,10 +51,14 @@ public struct Course: Identifiable {
     }
     private var _coefficient: Double
 
-    public init(id: UUID = UUID(), name: String, mark: Double, coefficient: Double) {
+    public init(withId id: UUID, andName name: String, andMark mark: Double, andCoefficient coefficient: Double) {
         self.id = id
         _name = name
         _mark = mark
         _coefficient = coefficient
+    }
+
+    public init(withName name: String, andMark mark: Double, andCoefficient coefficient: Double) {
+        self.init(with: UUID(), andName: name, andMark: mark, andCoefficient: coefficient)
     }
 }
