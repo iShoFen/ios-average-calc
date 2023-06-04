@@ -31,7 +31,6 @@
 		EC8FC89E2A24509A009142AB /* BlockEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8FC89D2A24509A009142AB /* BlockEditView.swift */; };
 		EC8FC8A02A245339009142AB /* UEsEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8FC89F2A245339009142AB /* UEsEditView.swift */; };
 		EC8FC8A22A2457BF009142AB /* UEEditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8FC8A12A2457BF009142AB /* UEEditItemView.swift */; };
-		EC8FC8A42A24715D009142AB /* BlockSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8FC8A32A24715D009142AB /* BlockSheetView.swift */; };
 		ECD42FBA2A2279E100E04427 /* UEDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD42FB92A2279E100E04427 /* UEDetailPage.swift */; };
 		ECD42FBC2A227ADE00E04427 /* CoursesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD42FBB2A227ADE00E04427 /* CoursesView.swift */; };
 		ECD42FBE2A227AEF00E04427 /* CourseItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD42FBD2A227AEF00E04427 /* CourseItemView.swift */; };
@@ -80,7 +79,6 @@
 		EC8FC89D2A24509A009142AB /* BlockEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockEditView.swift; sourceTree = "<group>"; };
 		EC8FC89F2A245339009142AB /* UEsEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UEsEditView.swift; sourceTree = "<group>"; };
 		EC8FC8A12A2457BF009142AB /* UEEditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UEEditItemView.swift; sourceTree = "<group>"; };
-		EC8FC8A32A24715D009142AB /* BlockSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockSheetView.swift; sourceTree = "<group>"; };
 		ECD42FB92A2279E100E04427 /* UEDetailPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UEDetailPage.swift; sourceTree = "<group>"; };
 		ECD42FBB2A227ADE00E04427 /* CoursesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesView.swift; sourceTree = "<group>"; };
 		ECD42FBD2A227AEF00E04427 /* CourseItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseItemView.swift; sourceTree = "<group>"; };
@@ -187,7 +185,6 @@
 				EC03A84A2A22521600B1F488 /* BlocksView.swift */,
 				EC03A8482A22520D00B1F488 /* BlockItemView.swift */,
 				EC8FC89D2A24509A009142AB /* BlockEditView.swift */,
-				EC8FC8A32A24715D009142AB /* BlockSheetView.swift */,
 			);
 			path = Blocks;
 			sourceTree = "<group>";
@@ -405,7 +402,6 @@
 			files = (
 				EC03A84F2A22522700B1F488 /* UEsView.swift in Sources */,
 				ECD42FBA2A2279E100E04427 /* UEDetailPage.swift in Sources */,
-				EC8FC8A42A24715D009142AB /* BlockSheetView.swift in Sources */,
 				ECD42FBE2A227AEF00E04427 /* CourseItemView.swift in Sources */,
 				EC03A8512A22523200B1F488 /* MarkSlider.swift in Sources */,
 				EC8FC8A22A2457BF009142AB /* UEEditItemView.swift in Sources */,
