@@ -79,10 +79,10 @@ public struct UCA: Identifiable, Equatable {
                 tmpUes.removeAll { ue in !block.ues.contains { $0.id == ue.id }  }
             }
 
-            update(UEs: &tmpUes, fromBlock: tmpBlock)
+            update(UEs: &tmpUes, fromBlock: block)
 
             if (tmpBlock.name == "Total") {
-                tmpUes.append(contentsOf: block.ues.filter({ ue in !tmpBlock.ues.contains(where: { $0.id == ue.id }) }))
+                tmpUes.append(contentsOf: block.ues.filter({ ue in !tmpBlock.ues.contains(where: { $0 == ue }) }))
             }
 
             if !tmpBlocks[index].updateUEs(from: tmpUes) {
@@ -97,7 +97,7 @@ public struct UCA: Identifiable, Equatable {
 
     private func update(UEs ues: inout [UE], fromBlock block: Block) {
         for ue in block.ues {
-            if let index = ues.firstIndex(where: { $0.id == ue.id }) {
+            if let index = ues.firstIndex(where: { $0 == ue }) {
                 ues[index] = ue
             }
         }
