@@ -19,11 +19,19 @@ public class UCAVM: ObservableObject, Identifiable, Equatable {
 
     @Published
     public var blocks: [BlockVM]
+    
+    @Published
+    public var selectedBlock: BlockVM = BlockVM()
+    
+    public private(set) var totalIndex: Int = 0
 
     public init(from model: UCA) {
         self.model = model
         blocks = model.blocks.map { BlockVM(from: $0) }
         blocks.forEach { addCallbacks(block: $0) }
+        
+        totalIndex = blocks.firstIndex(where: { $0.name == "Total" })!
+        selectedBlock = blocks[totalIndex]
     }
 
     private func addCallbacks(block: BlockVM) {
@@ -40,12 +48,8 @@ public class UCAVM: ObservableObject, Identifiable, Equatable {
         if !ue_validation(copy: block, error: &error) {
             return false
         }
-
-         _ = model.updateBlocks(with: block.model)
-
-        addCallbacks(block: block)
-
-        blocks.append(block)
+        
+        blockVM_changed(baseVM: block)
 
         return true
     }
@@ -64,7 +68,7 @@ public class UCAVM: ObservableObject, Identifiable, Equatable {
             if model.updateBlocks(with: blockVM.model) {
                 blocks = model.blocks.map { BlockVM(from: $0) }
                 blocks.forEach { addCallbacks(block: $0) }
-                objectWillChange.send()
+                selectedBlock = blocks[totalIndex]
             }
         }
     }
