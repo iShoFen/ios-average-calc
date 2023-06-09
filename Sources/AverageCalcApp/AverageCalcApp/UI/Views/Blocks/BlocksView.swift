@@ -54,9 +54,12 @@ struct BlocksView: View {
                     BlockItemView(blockVM: blockVM)
                         .padding(.vertical, 8)
                     
-                    NavigationLink(destination: BlockDetailPage(blockVM: blockVM, ucaVM: ucaVM)) {
+                    NavigationLink(destination: BlockDetailPage(ucaVM: ucaVM, blockVM: blockVM)) {
                         Image(systemName: "square.and.pencil")
                     }
+                    .simultaneousGesture(TapGesture().onEnded {
+                        ucaVM.selectedBlock = blockVM
+                    })
                 }
             }
 

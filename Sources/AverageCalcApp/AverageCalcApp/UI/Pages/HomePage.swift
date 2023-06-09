@@ -28,8 +28,8 @@ struct HomePage: View {
                     .padding(.horizontal, 32)
                     .padding(.top, 32)
                 
-                    let totalIndex = ucaVM.blocks.firstIndex(where: { $0.name == "Total" })!
-                    UEsView(blockVM: ucaVM.blocks[totalIndex])
+                    
+                    UEsView(ucaVM: ucaVM)
                 }
                 .background(CalcColors.lightGrey)
                 .cornerRadius(8)

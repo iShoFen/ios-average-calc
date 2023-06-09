@@ -10,8 +10,10 @@ import AverageCalcStub
 import AverageCalcViewModel
 
 struct BlockDetailPage: View {
-    @ObservedObject var blockVM: BlockVM
+    @Environment(\.presentationMode) var presentationMode
+    
     @ObservedObject var ucaVM: UCAVM
+    @ObservedObject var blockVM: BlockVM
 
     @State private var isError = false
     @State private var error = ""
@@ -26,13 +28,25 @@ struct BlockDetailPage: View {
                 
                 Label("Détails des UEs", systemImage: "note.text")
                 
-                UEsView(blockVM: blockVM)
+                UEsView(ucaVM: ucaVM)
             }
         }
         .padding(.horizontal, 8)
         .padding(.vertical)
+        .navigationBarBackButtonHidden(true)
         .navigationTitle(blockVM.name)
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    ucaVM.selectedBlock = ucaVM.blocks[ucaVM.totalIndex]
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    HStack {
+                       Image(systemName: "chevron.left")
+                       Text("Calculette")
+                   }
+                }
+            }
             ToolbarItem(placement: .primaryAction) {
                 Button {
                     blockVM.onEditing()
@@ -72,7 +86,7 @@ struct BlockDetailPage_Previews: PreviewProvider {
     static var previews: some View {
         let ucaVM = UCAVM(from: loadAllBlocks())
         NavigationStack {
-            BlockDetailPage(blockVM: ucaVM.blocks[0], ucaVM: ucaVM)
+            BlockDetailPage(ucaVM: ucaVM, blockVM: ucaVM.blocks[0])
         }
     }
 }
