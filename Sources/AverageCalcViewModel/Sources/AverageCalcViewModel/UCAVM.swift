@@ -8,9 +8,13 @@
 import Foundation
 import AverageCalcModel
 
-public class UCAVM: ObservableObject, Identifiable, Equatable {
+public class UCAVM: ObservableObject, Identifiable, Equatable, Hashable {
     public static func == (lhs: UCAVM, rhs: UCAVM) -> Bool {
         lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 
     var model: UCA
@@ -35,9 +39,9 @@ public class UCAVM: ObservableObject, Identifiable, Equatable {
     }
 
     private func addCallbacks(block: BlockVM) {
-        block.addUpdatedFunc(blockVM_changed)
-        block.addValidationFunc(block_validation)
-        block.addValidationFunc(ue_validation)
+        block.subscribeUpdate(with: self, and: blockVM_changed)
+        block.subscribeValidation(with: self, and: block_validation)
+        block.subscribeValidation(with: selectedBlock, and: ue_validation)
     }
 
     public func addBlock(_ block: BlockVM, error: inout String) -> Bool {

@@ -8,9 +8,13 @@
 import Foundation
 import AverageCalcModel
 
-public class BlockVM: BaseVM, Equatable {
+public class BlockVM: BaseVM, Equatable, Hashable {
     public static func == (lhs: BlockVM, rhs: BlockVM) -> Bool {
         lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
     }
 
     private let ueError = "Une UE avec le même nom existe déjà. Veuillez le changer afin de sauvegarder les modifications !"
@@ -23,6 +27,13 @@ public class BlockVM: BaseVM, Equatable {
 
     @Published
     var model: Block {
+        willSet(newValue) {
+            if model.ues.count != ues.count ||
+                !model.ues.allSatisfy({ ue in ues.contains { vm in vm.model == ue } }) {
+                           ues.forEach { $0.unsubscribeUpdate(with: self) }
+                           ues.forEach { $0.unsubscribeValidation(with: self) }
+            }
+        }
         didSet {
             if model.name != name {
                 name = model.name
@@ -80,10 +91,10 @@ public class BlockVM: BaseVM, Equatable {
     }
 
     private func addCallbacks(ueVM: UEVM) {
-        ueVM.addUpdatedFunc(ueVM_changed)
-        ueVM.addValidationFunc(ue_validation)
+        ueVM.subscribeUpdate(with: self, and: ueVM_changed)
+        ueVM.subscribeValidation(with: self, and: ue_validation)
         validationFuncs.forEach {
-            ueVM.addValidationFunc($0)
+            ueVM.subscribeValidation(with: self, and: $0.value)
         }
     }
     

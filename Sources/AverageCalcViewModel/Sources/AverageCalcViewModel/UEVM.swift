@@ -8,9 +8,13 @@
 import Foundation
 import AverageCalcModel
 
-public class UEVM: BaseVM, Equatable {
+public class UEVM: BaseVM, Equatable, Hashable {
     public static func == (lhs: UEVM, rhs: UEVM) -> Bool {
         lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
     }
     
     private let courseError = "Le nom de cours est déjà utilisé. Veuillez le changer afin de sauvegarder les modifications !"
@@ -24,6 +28,13 @@ public class UEVM: BaseVM, Equatable {
 
     @Published
     var model: UE {
+        willSet(newValue) {
+            if model.courses.count != courses.count ||
+                       !model.courses.allSatisfy({ course in courses.contains { vm in vm.model == course } }) {
+                           courses.forEach { $0.unsubscribeUpdate(with: self) }
+                           courses.forEach { $0.unsubscribeValidation(with: self) }
+            }
+        }
         didSet {
             if model.name != name {
                 name = model.name
@@ -95,8 +106,8 @@ public class UEVM: BaseVM, Equatable {
     }
 
     public func addCallbacks(courseVM: CourseVM) {
-        courseVM.addUpdatedFunc(courseVM_changed)
-        courseVM.addValidationFunc(course_validation)
+        courseVM.subscribeUpdate(with: self, and: courseVM_changed)
+        courseVM.subscribeValidation(with: self, and: course_validation)
     }
 
     public func onEditing() {

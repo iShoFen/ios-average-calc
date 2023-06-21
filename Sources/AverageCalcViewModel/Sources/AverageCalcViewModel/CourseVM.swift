@@ -8,9 +8,13 @@
 import Foundation
 import AverageCalcModel
 
-public class CourseVM: BaseVM, Equatable {
+public class CourseVM: BaseVM, Equatable, Hashable {
     public static func == (lhs: CourseVM, rhs: CourseVM) -> Bool {
         lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
     }
 
     @Published

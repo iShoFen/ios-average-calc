@@ -5,27 +5,35 @@
 import Foundation
 
 public class BaseVM: ObservableObject, Identifiable {
-    var updatedFuncs: [(BaseVM) -> ()] = []
+    var updateFuncs: [AnyHashable:(BaseVM) -> ()] = [:]
 
-    var validationFuncs: [(BaseVM, inout String) -> Bool] = []
+    var validationFuncs: [AnyHashable:(BaseVM, inout String) -> Bool] = [:]
 
-    func addUpdatedFunc(_ funcToAdd: @escaping (BaseVM) -> ()) {
-        updatedFuncs.append(funcToAdd)
+    public func subscribeUpdate(with obj: AnyHashable, and function:@escaping (BaseVM) -> ()) {
+        updateFuncs[obj] = function
+    }
+    
+    public func unsubscribeUpdate(with obj: AnyHashable) {
+        updateFuncs.removeValue(forKey: obj)
     }
 
-    func addValidationFunc(_ funcToAdd: @escaping (BaseVM, inout String) -> Bool) {
-        validationFuncs.append(funcToAdd)
+    public func subscribeValidation(with obj: AnyHashable,and function: @escaping (BaseVM, inout String) -> Bool) {
+        validationFuncs[obj] = function
+    }
+
+    public func unsubscribeValidation(with obj: AnyHashable) {
+        validationFuncs.removeValue(forKey: obj)
     }
 
     func onModelChanged() {
-        for funcToCall in updatedFuncs {
-            funcToCall(self)
+        for kvp in updateFuncs {
+            kvp.value(self)
         }
     }
 
     func onValidating(_ copy: BaseVM, _ message: inout String) -> Bool {
-        for funcToCall in validationFuncs {
-            if !funcToCall(copy, &message) {
+        for kvp in validationFuncs {
+            if !kvp.value(copy, &message) {
                 return false
             }
         }
