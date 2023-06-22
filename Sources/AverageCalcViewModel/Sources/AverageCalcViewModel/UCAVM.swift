@@ -8,107 +8,99 @@
 import Foundation
 import AverageCalcModel
 
-public class UCAVM: ObservableObject {
-    @Published
-    public var blocks: [Block] = []
-
-    public init(withBlock blocks: [Block]) {
-        self.blocks = blocks
+public class UCAVM: ObservableObject, Identifiable, Equatable, Hashable {
+    public static func == (lhs: UCAVM, rhs: UCAVM) -> Bool {
+        lhs.id == rhs.id
     }
     
-    public func checkBlockNameAvailability(of data: Block.Data) -> Bool {
-        var result = true
-        blocks.forEach { block in
-            if block.name == data.name && block.id != data.id {
-                result = false
-            }
-        }
-
-        return result
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 
-    public func checkUENameAvailability(of data: UE.Data) -> Bool {
-        let totalIndex = blocks.firstIndex(where: { $0.name == "Total" })!
-        return !blocks[totalIndex].ues.contains(where: { $0.name == data.name && $0.id != data.id })
+    public var model: UCA = UCA()
+
+    public var id: UUID { model.id }
+
+    @Published
+    public var blocks: [BlockVM] = []
+    
+    @Published
+    public var selectedBlock: BlockVM = BlockVM()
+    
+    public private(set) var totalIndex: Int = 0
+
+    public init(from model: UCA) {
+        load(from: model)
     }
 
-    public func remove(block: Block) -> Bool {
-        if let index = blocks.firstIndex(where: { $0.id == block.id }) {
-            if blocks[index].name != "Total" {
-                blocks.remove(at: index)
-                
-                return true
-            }
-        }
-        
-        return false
+    public init() { }
+
+
+    public func load(from model: UCA) {
+        self.model = model
+        blocks = model.blocks.map { BlockVM(from: $0) }
+        blocks.forEach { addCallbacks(block: $0) }
+
+        totalIndex = blocks.firstIndex(where: { $0.name == "Total" })!
+        selectedBlock = blocks[totalIndex]
     }
 
-    public func updateUE (with ue: UEVM) -> Bool {
-        var tmpBlocks = blocks
-        for i in 0..<tmpBlocks.count {
-            var tmpUes = tmpBlocks[i].ues
-            if let index = tmpUes.firstIndex(where: { $0.id == ue.original.id }) {
-                tmpUes[index] = ue.original
-            }
-
-            if !tmpBlocks[i].updateUEs(from: tmpUes) {
-                return false
-            }
-        }
-
-        blocks = tmpBlocks
-        return true
+    private func addCallbacks(block: BlockVM) {
+        block.subscribeUpdate(with: self, and: blockVM_changed)
+        block.subscribeValidation(with: self, and: block_validation)
+        block.subscribeValidation(with: selectedBlock, and: ue_validation)
     }
 
-    public func update(with block: BlockVM) -> Bool {
-        if !updateOthersOthersBlocks(block.original) {
+    public func addBlock(_ block: BlockVM, error: inout String) -> Bool {
+        if !block_validation(copy: block, error: &error) {
             return false
         }
 
-        if !blocks.contains(where: { $0.id == block.original.id }) {
-            blocks.append(block.original)
+        if !ue_validation(copy: block, error: &error) {
+            return false
         }
+        
+        blockVM_changed(baseVM: block)
 
         return true
     }
 
-    private func updateOthersOthersBlocks(_ block: Block) -> Bool {
-        var tmpBlocks = blocks
-        let isBlockTotal = block.name == "Total"
-
-        for (index, tmpBlock) in tmpBlocks.enumerated() {
-            if (tmpBlock == block) {
-                tmpBlocks[index] = block
-                continue
+    public func removeBlock(_ block: BlockVM) {
+        let removed = model.remove(block: block.model)
+        if removed {
+            if let index = blocks.firstIndex(of: block) {
+                blocks.remove(at: index)
             }
+        }
+    }
 
-            var tmpUes = tmpBlock.ues
-            if isBlockTotal {
-                tmpUes.removeAll { ue in !block.ues.contains { $0.id == ue.id }  }
+    private func blockVM_changed(baseVM: BaseVM) {
+        if let blockVM = baseVM as? BlockVM {
+            if model.updateBlocks(with: blockVM.model) {
+                blocks = model.blocks.map { BlockVM(from: $0) }
+                blocks.forEach { addCallbacks(block: $0) }
+                selectedBlock = blocks[totalIndex]
             }
+        }
+    }
 
-            update(UEs: &tmpUes, fromBlock: tmpBlock)
-
-            if (tmpBlock.name == "Total") {
-                tmpUes.append(contentsOf: block.ues.filter({ ue in !tmpBlock.ues.contains(where: { $0.id == ue.id }) }))
-            }
-
-            if !tmpBlocks[index].updateUEs(from: tmpUes) {
+    private func block_validation(copy: BaseVM, error: inout String) -> Bool {
+        if let blockVM = copy as? BlockVM {
+            if !model.checkBlockNameAvailability(of: blockVM.model) {
+                error = "Le nom du bloc doit être unique. Veuillez le changer afin de sauvegarder les modifications ! "
                 return false
             }
         }
-
-        blocks = tmpBlocks
-
         return true
     }
 
-    private func update(UEs ues: inout [UE], fromBlock block: Block) {
-        for ue in block.ues {
-            if let index = ues.firstIndex(where: { $0.id == ue.id }) {
-                ues[index] = ue
+    private func ue_validation(copy: BaseVM, error: inout String) -> Bool {
+        if let ueVM = copy as? UEVM {
+            if !model.checkUENameAvailability(of: ueVM.model) {
+                error = "Le nom de l'UE est utilisé dans un autre bloc. Veuillez le changer afin de sauvegarder les modifications ! "
+                return false
             }
         }
+        return true
     }
 }

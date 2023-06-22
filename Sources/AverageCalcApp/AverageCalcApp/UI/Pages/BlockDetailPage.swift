@@ -10,30 +10,43 @@ import AverageCalcStub
 import AverageCalcViewModel
 
 struct BlockDetailPage: View {
-    @ObservedObject var blockVM: BlockVM
+    @Environment(\.presentationMode) var presentationMode
+    
     @ObservedObject var ucaVM: UCAVM
+    @ObservedObject var blockVM: BlockVM
 
-    @State private var blockError = false
-    @State private var ueError = false
+    @State private var isError = false
+    @State private var error = ""
     
     var body: some View {
         ScrollView {
-            let blockVM2 = BlockVM(fromBlock: ucaVM.blocks.first(where: { $0.id == blockVM.original.id }) ?? blockVM.original)
             VStack(alignment: .leading, spacing: 32) {
-                BlockItemView(blockVM: blockVM2)
+                BlockItemView(blockVM: blockVM)
                     .font(.title3)
                 
                 Divider()
                 
                 Label("Détails des UEs", systemImage: "note.text")
                 
-                UEsView(blockVM: blockVM2, ucaVM: ucaVM)
+                UEsView(ucaVM: ucaVM)
             }
         }
         .padding(.horizontal, 8)
         .padding(.vertical)
-        .navigationTitle(blockVM.original.name)
+        .navigationBarBackButtonHidden(true)
+        .navigationTitle(blockVM.name)
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    ucaVM.selectedBlock = ucaVM.blocks[ucaVM.totalIndex]
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    HStack {
+                       Image(systemName: "chevron.left")
+                       Text("Calculette")
+                   }
+                }
+            }
             ToolbarItem(placement: .primaryAction) {
                 Button {
                     blockVM.onEditing()
@@ -43,41 +56,23 @@ struct BlockDetailPage: View {
             }
         }
         .sheet(isPresented: $blockVM.isEditing, onDismiss: {
-            _ = blockVM.onEdited(isCancelled: true)
+            _ = blockVM.onEdited(isCanceled: true, error: &error)
         }) {
             NavigationStack {
-                BlockEditView(blockData: $blockVM.model, ucaVM: ucaVM)
+                BlockEditView(blockVM: blockVM.copy!, ucaVM: ucaVM)
                     .toolbar {
                         ToolbarItem(placement: .confirmationAction) {
                             Button("Done") {
-                                blockError = !ucaVM.checkBlockNameAvailability(of: blockVM.model)
-                                
-                                if !blockError {
-                                    
-                                    blockVM.model.ues.forEach { ue in
-                                        ueError = !ucaVM.checkUENameAvailability(of: ue)
-                                        if ueError {
-                                            return
-                                        }
-                                    }
-                                    
-                                    if !ueError {
-                                        _ = blockVM.onEdited()
-                                        _ = ucaVM.update(with: blockVM)
-                                    }
-                                }
+                                isError = !blockVM.onEdited(error: &error)
                             }
-                            .alert("Le nom du Block est déjà utilisé par une autre. Veuillez le modifier afin de pouvoir sauvegarder les changements !", isPresented: $blockError) {
-                                Button("OK", role: .cancel) {}
-                            }
-                            .alert("Le nom d'une de vos UEs est déjà utilisé par une autre. Veuillez le modifier afin de pouvoir sauvegarder les changements !", isPresented: $ueError) {
+                            .alert(error, isPresented: $isError) {
                                 Button("OK", role: .cancel) {}
                             }
                         }
 
                         ToolbarItem(placement: .cancellationAction) {
                             Button("Cancel") {
-                                _ = blockVM.onEdited(isCancelled: true)
+                                _ = blockVM.onEdited(isCanceled: true, error: &error)
 
                             }
                         }
@@ -89,10 +84,9 @@ struct BlockDetailPage: View {
 
 struct BlockDetailPage_Previews: PreviewProvider {
     static var previews: some View {
-        let ucaVM = UCAVM(withBlock: loadAllBlocks())
-        let blockVM = BlockVM(fromBlock: ucaVM.blocks[0])
+        let ucaVM = UCAVM(from: loadAllBlocks())
         NavigationStack {
-            BlockDetailPage(blockVM: blockVM, ucaVM: ucaVM)
+            BlockDetailPage(ucaVM: ucaVM, blockVM: ucaVM.blocks[0])
         }
     }
 }

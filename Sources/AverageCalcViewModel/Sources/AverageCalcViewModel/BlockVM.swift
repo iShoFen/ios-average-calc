@@ -8,76 +8,148 @@
 import Foundation
 import AverageCalcModel
 
-public extension Block {
-    struct Data: Identifiable {
-        public let id: UUID
-        public var name: String
-        public var ues: [UE.Data]
-        public var average: Double
-
-        func toBlock() -> Block {
-            Block(id: id, name: name, ues: ues.map { $0.toUE() })
-        }
+public class BlockVM: BaseVM, Equatable, Hashable {
+    public static func == (lhs: BlockVM, rhs: BlockVM) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
     }
 
-    var data: Data {
-        Data(id: id,
-            name: name,
-            ues: ues.map { $0.data },
-            average: average)
-    }
-
-    mutating func update(from data: Data) -> Bool {
-        guard self.id == data.id else {
-            return false
-        }
-        let fail = !updateUEs(from: data.ues.map { $0.toUE() })
-        if fail { return false }
-
-        name = data.name
-        return true
-    }
-}
-
-public class BlockVM: ObservableObject {
-    public var original: Block
-
-    @Published
-    public var model: Block.Data
+    private let ueError = "Une UE avec le même nom existe déjà. Veuillez le changer afin de sauvegarder les modifications !"
 
     @Published
     public var isEditing: Bool = false
 
-    public init(fromBlock block: Block) {
-        original = block
-        model = block.data
+    @Published
+    public var copy: BlockVM? = nil
+
+    @Published
+    var model: Block {
+        willSet(newValue) {
+            if model.ues.count != ues.count ||
+                !model.ues.allSatisfy({ ue in ues.contains { vm in vm.model == ue } }) {
+                           ues.forEach { $0.unsubscribeUpdate(with: self) }
+                           ues.forEach { $0.unsubscribeValidation(with: self) }
+            }
+        }
+        didSet {
+            if model.name != name {
+                name = model.name
+            }
+
+            if model.ues.count != ues.count ||
+                !model.ues.allSatisfy({ ue in ues.contains { vm in vm.model == ue } }) {
+                ues = model.ues.map { UEVM(from: $0) }
+                ues.forEach { addCallbacks(ueVM: $0) }
+            }
+
+            
+            onModelChanged()
+        }
     }
 
+    public var id: UUID { model.id }
+
+    public var average: Double { model.average }
+
+    @Published
+    public var name: String {
+        didSet {
+            if model.name != name {
+                model.name = name
+            }
+        }
+    }
+
+    @Published
+    public var ues: [UEVM] {
+        didSet {
+            if model.ues.count != ues.count ||
+                !model.ues.allSatisfy({ ue in ues.contains { vm in vm.model == ue } }) {
+                _ = model.updateUEs(from: ues.map { $0.model })
+            }
+        }
+    }
+
+    public init(from model: Block) {
+        self.model = model
+        name = model.name
+        ues = model.ues.map { UEVM(from: $0) }
+        super.init()
+
+        ues.forEach { addCallbacks(ueVM: $0) }
+    }
+    
+    public override init() {
+        let model = Block(withName: "Nouveau Bloc")
+        self.model = model
+        name = model.name
+        ues = []
+        super.init()
+    }
+
+    private func addCallbacks(ueVM: UEVM) {
+        ueVM.subscribeUpdate(with: self, and: ueVM_changed)
+        ueVM.subscribeValidation(with: self, and: ue_validation)
+        validationFuncs.forEach {
+            ueVM.subscribeValidation(with: self, and: $0.value)
+        }
+    }
+    
     public func onEditing() {
-        model = original.data
+        copy = BlockVM(from: model)
         isEditing = true
     }
 
-    public func onEdited(isCancelled: Bool = false) -> Bool {
-        if isCancelled {
-            isEditing = false
-            model = original.data
-            return true
-        }
-        
-        if original.update(from: model) {
-            isEditing = false
+    public func onEdited(isCanceled canceled: Bool = false, error: inout String) -> Bool {
+        if !isEditing { return false }
+        if !canceled && !update(error: &error) { return false }
+
+        copy = nil
+        isEditing = false
+
+        return true
+    }
+
+    private func update(error: inout String) -> Bool {
+        if let copy = copy {
+            if !onValidating(copy, &error) {
+                return false
+            }
+
+            if !copy.model.canUpdateUEs(from: copy.ues.map { $0.model }) {
+                error = ueError
+                return false
+            }
+            name = copy.name
+            _ = model.updateUEs(from: copy.ues.map { $0.model })
+            ues = copy.ues.map { UEVM(from: $0.model) }
+            ues.forEach { addCallbacks(ueVM: $0) }
 
             return true
         }
-
         return false
     }
     
-    public func updateUE(fromUEVM ueVM: UEVM) {
-        if let index = model.ues.firstIndex(where: { $0.id == ueVM.model.id }) {
-            model.ues[index] = ueVM.model
-            _ = onEdited()
+    private func ueVM_changed(baseVM: BaseVM) {
+        if let ueVM = baseVM as? UEVM {
+            if model.updateUE(from: ueVM.model) {
+                objectWillChange.send()
+            }
         }
     }
+
+    private func ue_validation(copy: BaseVM, error: inout String) -> Bool {
+        if let ueVM = copy as? UEVM {
+            if !model.canUpdateUE(from: ueVM.model) {
+                error = ueError
+                return false
+            }
+        }
+
+        return true
+    }
+
 }

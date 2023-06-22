@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Block: Identifiable {
+public struct Block: Identifiable, Equatable, Codable {
     public static func == (lhs: Block, rhs: Block) -> Bool {
         lhs.id == rhs.id
     }
@@ -42,10 +42,14 @@ public struct Block: Identifiable {
         }
     }
     
-    public init(id: UUID = UUID(), name: String, ues: [UE]) {
+    public init(withId id: UUID, andName name: String, andUes ues: [UE] = []) {
         self.id = id
         _name = name
         self.ues = ues
+    }
+
+    public init(withName name: String, andUes ues: [UE] = []) {
+        self.init(withId: UUID(), andName: name, andUes: ues)
     }
 
     public mutating func addUE(_ ue: UE) -> Bool {
@@ -67,16 +71,46 @@ public struct Block: Identifiable {
         return true
     }
 
-    public mutating func updateUEs(from ues: [UE]) -> Bool {
+    public func canUpdateUEs(from ues: [UE]) -> Bool {
         let ids = ues.map { $0.id }
         let names = ues.map { $0.name }
-        
+
         guard Set(ids).count == ids.count && Set(names).count == names.count else {
             return false
         }
-        
+
+        return true
+    }
+
+    public mutating func updateUEs(from ues: [UE]) -> Bool {
+        guard canUpdateUEs(from: ues) else {
+            return false
+        }
+
         self.ues = ues
-        
+
+        return true
+    }
+
+    public func canUpdateUE(from ue: UE) -> Bool {
+        guard ues.contains(where: { $0 == ue }) else {
+            return false
+        }
+
+        guard !ues.contains(where: { $0.name == ue.name && $0 != ue }) else {
+            return false
+        }
+
+        return true
+    }
+
+    public mutating func updateUE(from ue: UE) -> Bool {
+        guard canUpdateUE(from: ue) else {
+            return false
+        }
+
+        ues[ues.firstIndex(where: { $0.id == ue.id })!] = ue
+
         return true
     }
 }

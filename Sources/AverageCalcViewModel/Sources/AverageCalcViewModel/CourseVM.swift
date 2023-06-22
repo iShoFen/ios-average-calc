@@ -8,53 +8,110 @@
 import Foundation
 import AverageCalcModel
 
-public extension Course {
-    struct Data: Identifiable {
-        public let id: UUID
-        public var name: String
-        public var mark: Double
-        public var coefficient: Double
-
-        func toCourse() -> Course {
-            Course(id: id, name: name, mark: mark, coefficient: coefficient)
-        }
+public class CourseVM: BaseVM, Equatable, Hashable {
+    public static func == (lhs: CourseVM, rhs: CourseVM) -> Bool {
+        lhs.id == rhs.id
     }
-
-    var data: Data {
-        Data(id: id, name: name, mark: mark, coefficient: coefficient)
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
     }
-
-    mutating func update(from data: Data) {
-        guard self.id == data.id else {return}
-        name = data.name
-        mark = data.mark
-        coefficient = data.coefficient
-    }
-}
-
-public class CourseVM: ObservableObject {
-    public var original: Course
-
-    @Published
-    public var model: Course.Data
 
     @Published
     public var isEditing: Bool = false
 
-    public init(fromCourse course: Course) {
-        original = course
-        model = course.data
+    @Published
+    public var copy: CourseVM? = nil
+
+    @Published
+    var model: Course  {
+        didSet {
+            if model.name != name {
+                name = model.name
+            }
+
+            if model.mark != mark {
+                mark = model.mark
+            }
+
+            if model.coefficient != coefficient {
+                coefficient = model.coefficient
+            }
+
+            onModelChanged()
+        }
+    }
+
+    @Published
+    public var name: String {
+        didSet {
+            if model.name != name {
+                model.name = name
+            }
+        }
+    }
+
+    @Published
+    public var mark: Double {
+        didSet {
+            if model.mark != mark {
+                model.mark = mark
+            }
+        }
+    }
+
+    @Published
+    public var coefficient: Double {
+        didSet {
+            if model.coefficient != coefficient {
+                model.coefficient = coefficient
+            }
+        }
+    }
+
+    public var id: UUID { model.id }
+
+    public init(from model: Course) {
+        self.model = model
+        name = model.name
+        mark = model.mark
+        coefficient = model.coefficient
+        super.init()
+    }
+    
+    public override init() {
+        let model = Course(withName: "Nouveau Cours", andMark: 0, andCoefficient: 1)
+        self.model = model
+        name = model.name
+        mark = model.mark
+        coefficient = model.coefficient
+        super.init()
     }
 
     public func onEditing() {
-        model = original.data
+        copy = CourseVM(from: model)
         isEditing = true
     }
 
-    public func onEdited(isCancelled: Bool = false) {
-        if !isCancelled {
-            original.update(from: model)
-        }
+    public func onEdited(isCanceled canceled: Bool = false, error: inout String) -> Bool {
+        if !isEditing { return false }
+
+        if !canceled && !update(error: &error) { return false }
+
+        copy = nil
         isEditing = false
+
+        return true
+    }
+
+    private func update(error: inout String) -> Bool {
+        if let copy = copy {
+            if !onValidating(copy, &error) { return false }
+            model = copy.model
+
+            return true
+        }
+
+        return false
     }
 }

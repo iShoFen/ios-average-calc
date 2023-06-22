@@ -10,13 +10,13 @@ import AverageCalcStub
 import AverageCalcViewModel
 
 struct BlockItemView: View {
-    public var blockVM: BlockVM
+    @ObservedObject var blockVM: BlockVM
     
     var body: some View {
         HStack {
-            Label(blockVM.model.name, systemImage: "doc.on.doc.fill")
+            Label(blockVM.name, systemImage: "doc.on.doc.fill")
             Spacer()
-            Text(blockVM.model.average.format(f: ".2"))
+            Text(blockVM.average.format(f: ".2"))
             Image(systemName: "graduationcap.circle.fill")
         }
     }
@@ -24,7 +24,7 @@ struct BlockItemView: View {
 
 struct BlockItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let blockVM = BlockVM(fromBlock: loadAllBlocks().first!)
-        BlockItemView(blockVM: blockVM)
+        let ucaVM = UCAVM(from: loadAllBlocks())
+        BlockItemView(blockVM: ucaVM.blocks[0])
     }
 }

@@ -8,68 +8,138 @@
 import Foundation
 import AverageCalcModel
 
-public extension UE {
-    struct Data: Identifiable {
-        public let id: UUID
-        public var name: String
-        public var coefficient: Double
-        public var courses: [Course.Data]
-        public var average: Double
-
-        func toUE() -> UE {
-            UE(id: id, name: name, coefficient: coefficient, courses: courses.map { $0.toCourse() })
-        }
+public class UEVM: BaseVM, Equatable, Hashable {
+    public static func == (lhs: UEVM, rhs: UEVM) -> Bool {
+        lhs.id == rhs.id
     }
-
-    var data: Data {
-        Data(id: id,
-            name: name,
-            coefficient: coefficient,
-            courses: courses.map { $0.data },
-            average: average)
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
     }
+    
+    private let courseError = "Le nom de cours est déjà utilisé. Veuillez le changer afin de sauvegarder les modifications !"
 
-    mutating func update(from data : Data) -> Bool {
-        guard self.id == data.id else {
-            return false
-        }
 
-        let fail = !updateCourses(from: data.courses.map { $0.toCourse() })
-        if fail { return false }
-
-        name = data.name
-        coefficient = data.coefficient
-        return true
-    }
-}
-
-public class UEVM: ObservableObject {
-    public var original: UE
-
-    @Published
-    public var model: UE.Data
     @Published
     public var isEditing: Bool = false
 
-    public init(fromUE ue: UE) {
-        original = ue
-        model = ue.data
+    @Published
+    public var copy: UEVM? = nil
+
+    @Published
+    var model: UE {
+        willSet(newValue) {
+            if model.courses.count != courses.count ||
+                       !model.courses.allSatisfy({ course in courses.contains { vm in vm.model == course } }) {
+                           courses.forEach { $0.unsubscribeUpdate(with: self) }
+                           courses.forEach { $0.unsubscribeValidation(with: self) }
+            }
+        }
+        didSet {
+            if model.name != name {
+                name = model.name
+            }
+
+            if model.coefficient != coefficient {
+                coefficient = model.coefficient
+            }
+
+            if model.courses.count != courses.count ||
+                       !model.courses.allSatisfy({ course in courses.contains { vm in vm.model == course } }) {
+                courses = model.courses.map { CourseVM(from: $0) }
+                courses.forEach { addCallbacks(courseVM: $0) }
+            }
+
+            onModelChanged()
+        }
+    }
+
+    public var id: UUID { model.id }
+
+    @Published
+    public var name: String {
+        didSet {
+            if model.name != name {
+                model.name = name
+            }
+        }
+    }
+
+    @Published
+    public var coefficient: Double {
+        didSet {
+            if model.coefficient != coefficient {
+                model.coefficient = coefficient
+            }
+        }
+    }
+
+    @Published
+    public var courses: [CourseVM] {
+        didSet {
+            if model.courses.count != courses.count ||
+                       !model.courses.allSatisfy({ course in courses.contains { vm in vm.model == course } }) {
+                _ = model.updateCourses(from: courses.map { $0.model })
+            }
+        }
+    }
+
+    public var average: Double { model.average }
+
+    public init(from model: UE) {
+        self.model = model
+        name = model.name
+        coefficient = model.coefficient
+        courses = model.courses.map { CourseVM(from: $0) }
+        super.init()
+
+        courses.forEach { addCallbacks(courseVM: $0) }
+    }
+    
+    public override init() {
+        let model = UE(withName: "Nouvelle UE", andCoefficient: 1)
+        self.model = model
+        name = model.name
+        coefficient = model.coefficient
+        courses = []
+        super.init()
+    }
+
+    public func addCallbacks(courseVM: CourseVM) {
+        courseVM.subscribeUpdate(with: self, and: courseVM_changed)
+        courseVM.subscribeValidation(with: self, and: course_validation)
     }
 
     public func onEditing() {
-        model = original.data
         isEditing = true
+        copy = UEVM(from: model)
     }
 
-    public func onEdited(isCancelled: Bool = false) -> Bool {
-        if isCancelled {
-            isEditing = false
-            model = original.data
-            return true
-        }
-        
-        if original.update(from: model) {
-            isEditing = false
+    public func onEdited(isCanceled canceled: Bool = false, error: inout String) -> Bool {
+          if !isEditing { return false }
+
+        if !canceled && !update(error: &error) { return false }
+
+        copy = nil
+        isEditing = false
+        return true
+    }
+
+    private func update(error: inout String) -> Bool {
+        if let copy = copy {
+
+            if !onValidating(copy, &error) {
+                return false
+            }
+
+            if !copy.model.canUpdateCourses(from: copy.courses.map { $0.model }) {
+                error = courseError
+                return false
+            }
+            model = copy.model
+
+            courses = copy.courses.map { CourseVM(from: $0.model) }
+            courses.forEach { addCallbacks(courseVM: $0) }
 
             return true
         }
@@ -77,10 +147,22 @@ public class UEVM: ObservableObject {
         return false
     }
 
-    public func updateCourse(fromCourseVM courseVM: CourseVM) {
-        if let index = model.courses.firstIndex(where: { $0.id == courseVM.model.id }) {
-            model.courses[index] = courseVM.model
-            _ = onEdited()
+    private func courseVM_changed(_ baseVM: BaseVM) {
+        if let courseVM = baseVM as? CourseVM {
+            if model.updateCourse(from: courseVM.model) {
+                objectWillChange.send()
+            }
         }
+    }
+
+    private func course_validation(copy: BaseVM, error: inout String) -> Bool {
+        if let courseVM = copy as? CourseVM {
+            if !model.canUpdateCourse(from: courseVM.model) {
+                error = courseError
+                return false
+            }
+        }
+
+        return true
     }
 }

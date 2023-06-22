@@ -7,22 +7,22 @@
 
 import SwiftUI
 import AverageCalcStub
-import AverageCalcModel
+import AverageCalcViewModel
 
 struct CourseEditItemView: View {
-    @Binding var courseData: Course.Data
+    @ObservedObject var courseVM: CourseVM
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Text("Nom du cours :")
                     .bold()
-                TextField("Inserez le nom du cours", text: $courseData.name)
+                TextField("Inserez le nom du cours", text: $courseVM.name)
             }
             HStack {
                 Text("Coefficient du cours")
                     .bold()
-                TextField("Inserez le coefficient du cours", value: $courseData.coefficient, format: .number)
+                TextField("Inserez le coefficient du cours", value: $courseVM.coefficient, format: .number)
             }
             
             Divider()
@@ -33,7 +33,8 @@ struct CourseEditItemView: View {
 
 struct CourseEditItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let courseData = loadAllBlocks()[0].ues[0].courses[0].data
-        CourseEditItemView(courseData: .constant(courseData))
+        let ucaVM = UCAVM(from: loadAllBlocks())
+        let courseVM = ucaVM.blocks[0].ues[0].courses[0]
+        CourseEditItemView(courseVM: courseVM)
     }
 }

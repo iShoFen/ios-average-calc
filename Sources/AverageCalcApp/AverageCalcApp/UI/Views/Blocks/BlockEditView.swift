@@ -7,12 +7,11 @@
 
 import SwiftUI
 import AverageCalcStub
-import AverageCalcModel
 import AverageCalcViewModel
 
 struct BlockEditView: View {
-    @Binding var blockData: Block.Data
-    @ObservedObject var ucaVM : UCAVM
+    @ObservedObject var blockVM: BlockVM
+    @ObservedObject var ucaVM: UCAVM
     
     var body: some View {
         ScrollView {
@@ -22,8 +21,8 @@ struct BlockEditView: View {
             HStack {
                 Text("Nom du bloc :")
                     .bold()
-                TextField("Entrez le nom du bloc", text: $blockData.name)
-                    .disabled(blockData.name == "Total")
+                TextField("Entrez le nom du bloc", text: $blockVM.name)
+                    .disabled(blockVM.name == "Total")
             }
             
             Divider()
@@ -34,18 +33,18 @@ struct BlockEditView: View {
                 
                 Menu {
                     Button {
-                        blockData.ues.append(UE(name: "Nouvelle UE", coefficient: 1, courses: []).data)
+                        blockVM.ues.append(UEVM())
                     } label: {
                         Text("Ajouter une nouvelle UE")
                     }
                     
                     let totalIndex = ucaVM.blocks.firstIndex(where: { $0.name == "Total" })!
-                    ForEach(ucaVM.blocks[totalIndex].ues) { ue in
-                        if !blockData.ues.contains(where: { $0.id == ue.id }) {
+                    ForEach(ucaVM.blocks[totalIndex].ues) { ueVM in
+                        if !blockVM.ues.contains(where: { $0 == ueVM }) {
                             Button {
-                                blockData.ues.append(ue.data)
+                                blockVM.ues.append(ueVM)
                             } label: {
-                                Text(ue.name)
+                                Text(ueVM.name)
                             }
                         }
                     }
@@ -56,7 +55,7 @@ struct BlockEditView: View {
             }
             .frame(maxWidth: .infinity, alignment: .center)
             
-            UEsEditView(blockData: $blockData)
+            UEsEditView(blockVM: blockVM)
         }
         .padding(8)
     }
@@ -64,8 +63,7 @@ struct BlockEditView: View {
 
 struct BlockEditView_Previews: PreviewProvider {
     static var previews: some View {
-        let ucaVM = UCAVM(withBlock: loadAllBlocks())
-        let blockData = ucaVM.blocks[1].data
-        BlockEditView(blockData: .constant(blockData), ucaVM: ucaVM)
+        let ucaVM = UCAVM(from: loadAllBlocks())
+        BlockEditView(blockVM: ucaVM.blocks[0], ucaVM: ucaVM)
     }
 }

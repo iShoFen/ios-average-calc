@@ -7,10 +7,10 @@
 
 import SwiftUI
 import AverageCalcStub
-import AverageCalcModel
+import AverageCalcViewModel
 
 struct UEEditView: View {
-    @Binding var ueData: UE.Data
+    @ObservedObject var ueVM: UEVM
     
     var body: some View {
         ScrollView {
@@ -20,13 +20,13 @@ struct UEEditView: View {
             HStack {
                 Text("Nom de l'UE:")
                     .bold()
-                TextField("Entrez le nom de l'UE", text: $ueData.name)
+                TextField("Entrez le nom de l'UE", text: $ueVM.name)
             }
             
             HStack {
                 Text("Coefficient de l'UE:")
                     .bold()
-                TextField("Entrez le coefficient de l'UE", value: $ueData.coefficient, format: .number)
+                TextField("Entrez le coefficient de l'UE", value: $ueVM.coefficient, format: .number)
             }
             
             Divider()
@@ -36,8 +36,7 @@ struct UEEditView: View {
                     .font(.title)
                 Button {
                     withAnimation(.easeInOut(duration: 0.5)) {
-                        let course = Course(name: "Nouveau Cours", mark: 0, coefficient: 1)
-                        ueData.courses.append(course.data)
+                        ueVM.courses.append(CourseVM())
                     }
                 } label: {
                     Image(systemName: "plus")
@@ -45,7 +44,7 @@ struct UEEditView: View {
             }
             .frame(maxWidth: .infinity, alignment: .center)
             
-            CoursesEditView(ueData: $ueData)
+            CoursesEditView(ueVM: ueVM)
             
             Spacer()
         }
@@ -55,7 +54,7 @@ struct UEEditView: View {
 
 struct UEEditView_Previews: PreviewProvider {
     static var previews: some View {
-        let ueData = loadAllBlocks()[0].ues[0].data
-        UEEditView(ueData: .constant(ueData))
+        let ucaVM = UCAVM(from: loadAllBlocks())
+        UEEditView(ueVM: ucaVM.blocks[0].ues[0])
     }
 }
