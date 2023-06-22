@@ -34,6 +34,7 @@
 		ECD42FBA2A2279E100E04427 /* UEDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD42FB92A2279E100E04427 /* UEDetailPage.swift */; };
 		ECD42FBC2A227ADE00E04427 /* CoursesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD42FBB2A227ADE00E04427 /* CoursesView.swift */; };
 		ECD42FBE2A227AEF00E04427 /* CourseItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD42FBD2A227AEF00E04427 /* CourseItemView.swift */; };
+		ECEC6D0E2A4312CE00F7AC9F /* JsonDataManager in Frameworks */ = {isa = PBXBuildFile; productRef = ECEC6D0D2A4312CE00F7AC9F /* JsonDataManager */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECEC6D0E2A4312CE00F7AC9F /* JsonDataManager in Frameworks */,
 				EC03A83F2A22500F00B1F488 /* AverageCalcViewModel in Frameworks */,
 				EC03A83D2A22500C00B1F488 /* AverageCalcStub in Frameworks */,
 			);
@@ -284,6 +286,7 @@
 			packageProductDependencies = (
 				EC03A83C2A22500C00B1F488 /* AverageCalcStub */,
 				EC03A83E2A22500F00B1F488 /* AverageCalcViewModel */,
+				ECEC6D0D2A4312CE00F7AC9F /* JsonDataManager */,
 			);
 			productName = AverageCalcApp;
 			productReference = EC6E4EFB2A224E5E005451F4 /* AverageCalcApp.app */;
@@ -752,6 +755,10 @@
 		EC03A83E2A22500F00B1F488 /* AverageCalcViewModel */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AverageCalcViewModel;
+		};
+		ECEC6D0D2A4312CE00F7AC9F /* JsonDataManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = JsonDataManager;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -17,12 +17,12 @@ public class UCAVM: ObservableObject, Identifiable, Equatable, Hashable {
         hasher.combine(id)
     }
 
-    var model: UCA
+    public var model: UCA = UCA()
 
     public var id: UUID { model.id }
 
     @Published
-    public var blocks: [BlockVM]
+    public var blocks: [BlockVM] = []
     
     @Published
     public var selectedBlock: BlockVM = BlockVM()
@@ -30,10 +30,17 @@ public class UCAVM: ObservableObject, Identifiable, Equatable, Hashable {
     public private(set) var totalIndex: Int = 0
 
     public init(from model: UCA) {
+        load(from: model)
+    }
+
+    public init() { }
+
+
+    public func load(from model: UCA) {
         self.model = model
         blocks = model.blocks.map { BlockVM(from: $0) }
         blocks.forEach { addCallbacks(block: $0) }
-        
+
         totalIndex = blocks.firstIndex(where: { $0.name == "Total" })!
         selectedBlock = blocks[totalIndex]
     }
