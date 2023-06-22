@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct UCA: Identifiable, Equatable {
+public struct UCA: Identifiable, Equatable, Codable {
 
     public static func == (lhs: UCA, rhs: UCA) -> Bool {
         lhs.id == rhs.id

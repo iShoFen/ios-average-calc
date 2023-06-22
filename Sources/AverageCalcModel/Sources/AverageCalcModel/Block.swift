@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Block: Identifiable, Equatable {
+public struct Block: Identifiable, Equatable, Codable {
     public static func == (lhs: Block, rhs: Block) -> Bool {
         lhs.id == rhs.id
     }
